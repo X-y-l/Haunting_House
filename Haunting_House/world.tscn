@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=28 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
@@ -73,6 +73,9 @@ background_color = Color(0.0235294, 0.0235294, 0.0156863, 1)
 background_energy_multiplier = 2.38
 sky = SubResource("Sky_o6po7")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_vxbb2"]
+size = Vector3(13.5146, 6.66346, 0.462163)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hd2k0"]
 albedo_color = Color(0.529412, 0.313726, 0.164706, 1)
 
@@ -81,7 +84,7 @@ rough = true
 bounce = 0.17
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nw2n8"]
-size = Vector3(4.89239, 1, 0.789563)
+size = Vector3(4.25056, 1, 1.4762)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xej8x"]
 albedo_texture = ExtResource("1_6lrts")
@@ -139,8 +142,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0140305, 3.56657, 6.37007)
 size = Vector3(14.492, 7.24662, 0.461444)
 
 [node name="Wall2" type="CSGBox3D" parent="Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0344658, 3.45709, -6.3115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0344658, 3.45709, -2.20842)
 size = Vector3(14.492, 7.24662, 0.461444)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Room/Wall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall2/StaticBody3D"]
+shape = SubResource("BoxShape3D_vxbb2")
 
 [node name="Wall3" type="CSGBox3D" parent="Room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21624, 3.34762, -0.108154)
@@ -152,7 +160,7 @@ size = Vector3(0.431957, 7.42956, 12.9889)
 
 [node name="Desk" type="CSGBox3D" parent="Room"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.2634, 0.695194, -1.26953)
-size = Vector3(4.89588, 1, 0.78637)
+size = Vector3(4.26017, 1, 1.4707)
 material = SubResource("StandardMaterial3D_hd2k0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Room/Desk"]
@@ -160,10 +168,11 @@ transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0
 physics_material_override = SubResource("PhysicsMaterial_h4fdm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Desk/StaticBody3D"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_nw2n8")
 
 [node name="Board" type="CSGBox3D" parent="Room"]
-transform = Transform3D(-0.992546, -3.03681e-16, -0.121869, 3.48787e-16, -1, -3.48787e-16, 0.121869, 3.88693e-16, -0.992546, -1.56093, 2.01401, -1.32614)
+transform = Transform3D(-1, 3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 3.48787e-16, 3.48787e-16, -3.48787e-16, -1, -0.38171, 2.46412, -1.97125)
 material_override = SubResource("StandardMaterial3D_xej8x")
 size = Vector3(2.07893, 1.54457, 0.0253594)
 
@@ -171,7 +180,7 @@ size = Vector3(2.07893, 1.54457, 0.0253594)
 transform = Transform3D(1, -2.29598e-26, -2.86997e-09, 6.30152e-25, 1, 1.0698e-23, -2.08346e-09, -3.01228e-25, 1, 0.00509775, 0, -0.0415187)
 
 [node name="MapMan" parent="Room/Board/SpriteLayer" instance=ExtResource("2_wq4ct")]
-transform = Transform3D(-0.01, 3.48787e-18, -8.6781e-10, 3.48787e-18, 0.01, -3.48787e-18, 1.96496e-09, -3.48787e-18, -0.01, 0.521631, -0.244265, 0.0163864)
+transform = Transform3D(-0.01, 3.48787e-18, -8.6781e-10, 3.48787e-18, 0.01, -3.48787e-18, 1.85028e-09, -3.48787e-18, -0.01, 0.521631, -0.244265, 0.0163864)
 
 [node name="RoomBounds" type="Node3D" parent="Room/Board"]
 
@@ -236,7 +245,7 @@ light_energy = 2.814
 omni_range = 8.90298
 
 [node name="Player" parent="." instance=ExtResource("1_x7o30")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394973, 2.18065, 0.436773)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394973, 2.18065, 0.244332)
 script = ExtResource("3_oveuh")
 
 [node name="CameraStorage" type="SubViewport" parent="."]
@@ -270,7 +279,7 @@ current = true
 fov = 100.83
 
 [node name="Television" parent="." instance=ExtResource("6_amud6")]
-transform = Transform3D(1.53209, 0, -1.28558, 0, 2, 0, 1.28558, 0, 1.53209, 1, 1.2, -1.2)
+transform = Transform3D(1.81759, 0, -0.834501, 0, 2, 0, 0.834502, 0, 1.81759, 0.59397, 1.2, -1.22901)
 
 [node name="Screen" type="MeshInstance3D" parent="Television"]
 transform = Transform3D(0.29, 0, 0, 0, -1.39876e-08, -0.3, 0, 0.32, -1.31134e-08, -0.07, 0.26, 0.181)
