@@ -242,25 +242,32 @@ script = ExtResource("3_oveuh")
 [node name="CameraStorage" type="SubViewport" parent="."]
 
 [node name="CCTVKitchen" parent="CameraStorage" instance=ExtResource("5_rshed")]
-transform = Transform3D(0.663127, -0.388271, 0.639928, -0.00855468, 0.850953, 0.525173, -0.748458, -0.353731, 0.560969, 17.597, 3.32392, -2.41769)
+transform = Transform3D(0.663127, -0.513728, 0.544376, -0.00855468, 0.722034, 0.691805, -0.748458, -0.463412, 0.474406, 17.597, 3.32392, -2.41769)
+fov = 102.557
 
 [node name="CCTVGameRoom" parent="CameraStorage" instance=ExtResource("5_rshed")]
-transform = Transform3D(0.806182, 0.316462, -0.499922, -0.00853656, 0.851071, 0.524981, 0.591606, -0.418963, 0.68882, 11.8315, 3.32292, 7.1301)
+transform = Transform3D(0.806182, 0.404827, -0.431493, -0.00853655, 0.737165, 0.675659, 0.591606, -0.541021, 0.597745, 11.8315, 3.32292, 7.1301)
+fov = 79.923
 
 [node name="CCTVLivingRoom" parent="CameraStorage" instance=ExtResource("5_rshed")]
-transform = Transform3D(0.806182, 0.316462, -0.499922, -0.00853656, 0.851071, 0.524981, 0.591606, -0.418963, 0.68882, 19.1753, 3.32415, 7.33906)
+transform = Transform3D(0.933436, 0.226931, -0.277848, -0.0110855, 0.792379, 0.609928, 0.358572, -0.566249, 0.742151, 19.9109, 3.32415, 7.33906)
+fov = 69.7491
 
 [node name="CCTVBathroom" parent="CameraStorage" instance=ExtResource("5_rshed")]
-transform = Transform3D(0.793576, -0.313769, 0.521331, -0.00853346, 0.850965, 0.525152, -0.608411, -0.421197, 0.672628, 32.0786, 3.32631, 7.26561)
+transform = Transform3D(0.793576, -0.313769, 0.521331, -0.0332189, 0.83317, 0.552018, -0.607564, -0.455387, 0.650761, 32.0786, 3.32631, 7.26561)
+fov = 72.2529
 
 [node name="CCTVDiningRoom" parent="CameraStorage" instance=ExtResource("5_rshed")]
-transform = Transform3D(0.550616, -0.434395, 0.712827, -0.00857312, 0.850945, 0.525185, -0.834714, -0.295287, 0.46482, 32.1461, 3.32634, 0.718902)
+transform = Transform3D(0.550616, -0.49603, 0.671399, -0.00857312, 0.8009, 0.598736, -0.834714, -0.33543, 0.436736, 32.1461, 3.32634, 0.718902)
+fov = 79.4577
 
 [node name="SubViewport" type="SubViewport" parent="."]
 render_target_update_mode = 4
 
 [node name="CCTVFoyer" parent="SubViewport" instance=ExtResource("5_rshed")]
+transform = Transform3D(-0.863315, -0.369868, 0.343343, -0.00866887, 0.691107, 0.722701, -0.504591, 0.620942, -0.599849, 25.1703, 3.19899, -7.5194)
 current = true
+fov = 100.83
 
 [node name="Television" parent="." instance=ExtResource("6_amud6")]
 transform = Transform3D(1.53209, 0, -1.28558, 0, 2, 0, 1.28558, 0, 1.53209, 1, 1.2, -1.2)
