@@ -92,13 +92,14 @@ func _switch_to_cctv(cam_node):
 		return
 	
 	new_cam = cam_node
-	var old_cam = $SubViewport.get_child(0)
-
-	$SubViewport.remove_child(old_cam)
-	$CameraStorage.remove_child(new_cam)
+	if $SubViewport.get_children().size() > 0:
+		var old_cam = $SubViewport.get_child(0)
 	
+		$SubViewport.remove_child(old_cam)
+		$CameraStorage.add_child(old_cam)
+			
+	$CameraStorage.remove_child(new_cam)
 	$SubViewport.add_child(new_cam)
-	$CameraStorage.add_child(old_cam)
 	
 	new_cam.get_node(\"CanvasLayer/ColorRect\").material.set_shader_parameter(\"white_noise_rate\", 1)
 	
