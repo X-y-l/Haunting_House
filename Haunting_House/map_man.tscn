@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy1wqcy0vt3ew"]
+
+[ext_resource type="Texture2D" uid="uid://b676adbuyvtde" path="res://person_bg.png" id="1_08lqp"]
+[ext_resource type="Texture2D" uid="uid://dwpf7lkwloh3i" path="res://person_fg.png" id="2_5bpog"]
+
+[node name="MapMan" type="Sprite3D"]
+transform = Transform3D(-0.01, 3.48787e-18, -8.74228e-10, 3.48787e-18, 0.01, -3.48787e-18, 8.74228e-10, -3.48787e-18, -0.01, 0, 0, 0)
+flip_v = true
+texture = ExtResource("1_08lqp")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0277929)
+flip_v = true
+modulate = Color(0.803922, 0.211765, 0.356863, 1)
+texture = ExtResource("2_5bpog")
