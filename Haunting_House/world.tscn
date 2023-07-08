@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=27 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1wqcy0vt3ew" path="res://map_man.tscn" id="2_wq4ct"]
 [ext_resource type="Script" path="res://player.gd" id="3_oveuh"]
 [ext_resource type="Shader" path="res://CRT.gdshader" id="4_kkfxb"]
+[ext_resource type="PackedScene" uid="uid://co6f4pwx3qajl" path="res://pin.tscn" id="7_fbbv1"]
 
 [sub_resource type="GDScript" id="GDScript_xg0o6"]
 script/source = "extends Node3D
@@ -48,6 +49,10 @@ sky = SubResource("Sky_o6po7")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hd2k0"]
 albedo_color = Color(0.529412, 0.313726, 0.164706, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h4fdm"]
+rough = true
+bounce = 0.17
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nw2n8"]
 size = Vector3(4.89239, 1, 0.789563)
@@ -135,6 +140,8 @@ size = Vector3(4.89588, 1, 0.78637)
 material = SubResource("StandardMaterial3D_hd2k0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Room/Desk"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_h4fdm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Desk/StaticBody3D"]
 shape = SubResource("BoxShape3D_nw2n8")
@@ -238,3 +245,6 @@ transform = Transform3D(0.947768, -0.318959, 1.39422e-08, -1.5246e-23, -4.37114e
 material_override = SubResource("StandardMaterial3D_s5dlf")
 mesh = SubResource("PlaneMesh_uo1h5")
 skeleton = NodePath("")
+
+[node name="Pin" parent="." instance=ExtResource("7_fbbv1")]
+transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, -1.61338, 2.59956, -1.30573)
