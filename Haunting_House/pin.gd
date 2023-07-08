@@ -8,7 +8,7 @@ var reset_rotation = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	reset_position = self.global_position
-	reset_rotation = self.global_rotation
+	reset_rotation = self.global_rotation + Vector3(0,3.14159,0)
 	self.freeze = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
