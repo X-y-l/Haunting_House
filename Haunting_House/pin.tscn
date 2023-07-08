@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://co6f4pwx3qajl"]
+[gd_scene load_steps=6 format=3 uid="uid://co6f4pwx3qajl"]
 
 [ext_resource type="Script" path="res://pin.gd" id="1_d7fi0"]
 [ext_resource type="PackedScene" uid="uid://cxtbdpfdruuxg" path="res://pin.glb" id="1_t1koa"]
+[ext_resource type="AudioStream" path="res://Audio/pin_fall_4.wav" id="3_svolh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gkp2k"]
 friction = 0.93
@@ -15,6 +16,8 @@ height = 0.0873696
 [node name="Pin" type="RigidBody3D"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 physics_material_override = SubResource("PhysicsMaterial_gkp2k")
+max_contacts_reported = 10
+contact_monitor = true
 script = ExtResource("1_d7fi0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -30,3 +33,8 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_svolh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cuwb8whbqnqfp" path="res://cctv-texture.tres" id="2_606cp"]
 [ext_resource type="PackedScene" uid="uid://cy1wqcy0vt3ew" path="res://map_man.tscn" id="2_wq4ct"]
 [ext_resource type="Script" path="res://player.gd" id="3_oveuh"]
-[ext_resource type="PackedScene" uid="uid://c8fa0otl7lb11" path="res://cctv.tscn" id="5_rshed"]
+[ext_resource type="PackedScene" path="res://cctv.tscn" id="5_rshed"]
 [ext_resource type="PackedScene" uid="uid://b58qoqeeyhrl4" path="res://TV/Television.glb" id="6_amud6"]
 [ext_resource type="PackedScene" uid="uid://cnivx8xyj7l4b" path="res://House/House.tscn" id="8_kko80"]
 
