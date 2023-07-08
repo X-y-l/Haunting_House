@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://5o8s0dqrhast"]
+
+[ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t2cjy"]
+
+[sub_resource type="Sky" id="Sky_o6po7"]
+sky_material = SubResource("ProceduralSkyMaterial_t2cjy")
+
+[sub_resource type="Environment" id="Environment_ivyr8"]
+background_mode = 1
+background_color = Color(0.0235294, 0.0235294, 0.0156863, 1)
+background_energy_multiplier = 2.38
+sky = SubResource("Sky_o6po7")
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ivyr8")
+
+[node name="Room" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Room"]
+size = Vector3(14.492, 0.310964, 12.7696)
+
+[node name="Ceil" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.02341, 0)
+size = Vector3(14.492, 0.310964, 12.7696)
+
+[node name="Wall1" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0140305, 3.56657, 6.37007)
+size = Vector3(14.492, 7.24662, 0.461444)
+
+[node name="Wall2" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0344658, 3.45709, -6.3115)
+size = Vector3(14.492, 7.24662, 0.461444)
+
+[node name="Wall3" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21624, 3.34762, -0.108154)
+size = Vector3(0.431957, 7.42956, 12.9889)
+
+[node name="Wall4" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01548, 3.23815, 0.165093)
+size = Vector3(0.431957, 7.42956, 12.9889)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41129, 6.14221, 0)
+light_color = Color(1, 0.921569, 0.788235, 1)
+light_energy = 0.39
+omni_range = 8.90298
+
+[node name="Player" parent="." instance=ExtResource("1_x7o30")]
