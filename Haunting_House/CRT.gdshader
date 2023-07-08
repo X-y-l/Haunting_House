@@ -10,6 +10,7 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
 // ブラウン管のガラスの曲がり具合（フラットなやつは0.0でいいかな）
 uniform float crt_curve : hint_range( 0.0, 1.0 ) = 0.02;
+uniform float brightness : hint_range( 0.0, 5.0 ) = 2.0;
 // 走査線の濃さ
 uniform float crt_scan_line_color : hint_range( 0.0, 1.0 ) = 0.347;
 // 光量
@@ -92,4 +93,5 @@ void fragment( )
 	,	vec4( 0.0, 0.0, 0.0, 1.0 )
 	,	float( 0 == int( fixed_uv.y / SCREEN_PIXEL_SIZE.y ) % 2 ) * crt_scan_line_color
 	);
+	COLOR = COLOR * vec4(brightness,brightness,brightness,1.0);
 }

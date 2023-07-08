@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=27 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1wqcy0vt3ew" path="res://map_man.tscn" id="2_wq4ct"]
 [ext_resource type="Script" path="res://player.gd" id="3_oveuh"]
 [ext_resource type="Shader" path="res://CRT.gdshader" id="4_kkfxb"]
+[ext_resource type="PackedScene" uid="uid://b58qoqeeyhrl4" path="res://TV/Television.glb" id="6_amud6"]
 
 [sub_resource type="GDScript" id="GDScript_xg0o6"]
 script/source = "extends Node3D
@@ -86,9 +87,10 @@ size = Vector3(2.07906, 1.54385, 0.0249659)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5xoja"]
 shader = ExtResource("4_kkfxb")
-shader_parameter/pixel_size = 8.0
+shader_parameter/pixel_size = 4.0
 shader_parameter/zoom = 1.0
 shader_parameter/crt_curve = 0.02
+shader_parameter/brightness = 3.096
 shader_parameter/crt_scan_line_color = 0.347
 shader_parameter/aperture_grille_rate = 0.4
 shader_parameter/rf_switch_esque_blur = 1.0
@@ -230,7 +232,7 @@ script = ExtResource("3_oveuh")
 render_target_update_mode = 4
 
 [node name="CCTV" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(0.335928, 2.11351e-16, 0.941888, 3.48787e-16, 1, -3.48787e-16, -0.941888, 4.45686e-16, 0.335928, -2.26208, 0.933316, 0.226915)
+transform = Transform3D(0.996738, -0.0403515, -0.0698908, 0, 0.866025, -0.5, 0.0807029, 0.498369, 0.863201, -2.26208, 0.933316, 0.226915)
 fov = 59.7
 
 [node name="CanvasLayer" type="CanvasLayer" parent="SubViewport/CCTV"]
@@ -243,8 +245,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Screen" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.947768, -0.318959, 1.39422e-08, -1.5246e-23, -4.37114e-08, -1, 0.318959, 0.947768, -4.14283e-08, 1.27881, 1.69022, -1.31941)
+[node name="Television" parent="." instance=ExtResource("6_amud6")]
+transform = Transform3D(1.53209, 0, -1.28558, 0, 2, 0, 1.28558, 0, 1.53209, 1, 1.2, -1.2)
+
+[node name="Screen" type="MeshInstance3D" parent="Television"]
+transform = Transform3D(0.29, 0, 0, 0, -1.39876e-08, -0.3, 0, 0.32, -1.31134e-08, -0.07, 0.26, 0.181)
 material_override = SubResource("StandardMaterial3D_s5dlf")
 mesh = SubResource("PlaneMesh_uo1h5")
 skeleton = NodePath("")
