@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8fa0otl7lb11"]
+
+[ext_resource type="Shader" path="res://CRT.gdshader" id="1_67ryx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xoja"]
+shader = ExtResource("1_67ryx")
+shader_parameter/pixel_size = 4.0
+shader_parameter/zoom = 1.0
+shader_parameter/crt_curve = 0.02
+shader_parameter/brightness = 3.096
+shader_parameter/crt_scan_line_color = 0.347
+shader_parameter/aperture_grille_rate = 0.4
+shader_parameter/rf_switch_esque_blur = 1.0
+shader_parameter/white_noise_rate = 0.17
+
+[node name="CCTV" type="Camera3D"]
+transform = Transform3D(-0.863315, -0.271334, 0.425517, -0.00866886, 0.851016, 0.525068, -0.504591, 0.44961, -0.737047, 25.1703, 3.19899, -7.5194)
+fov = 120.4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_5xoja")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

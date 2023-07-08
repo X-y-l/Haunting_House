@@ -1,11 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=27 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
 [ext_resource type="Texture2D" uid="uid://cuwb8whbqnqfp" path="res://cctv-texture.tres" id="2_606cp"]
 [ext_resource type="PackedScene" uid="uid://cy1wqcy0vt3ew" path="res://map_man.tscn" id="2_wq4ct"]
 [ext_resource type="Script" path="res://player.gd" id="3_oveuh"]
-[ext_resource type="Shader" path="res://CRT.gdshader" id="4_kkfxb"]
+[ext_resource type="PackedScene" uid="uid://c8fa0otl7lb11" path="res://cctv.tscn" id="5_rshed"]
 [ext_resource type="PackedScene" uid="uid://b58qoqeeyhrl4" path="res://TV/Television.glb" id="6_amud6"]
 [ext_resource type="PackedScene" uid="uid://cnivx8xyj7l4b" path="res://House/House.tscn" id="8_kko80"]
 
@@ -13,6 +13,7 @@
 script/source = "extends Node3D
 
 var pin = preload(\"res://pin.tscn\")
+var new_cam = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,6 +25,23 @@ func _process(delta):
 	pass
 
 func _input(event):
+	if event is InputEventKey and event.is_pressed():
+		var cams = $CameraStorage.get_children()
+		var rand = RandomNumberGenerator.new()
+		
+		new_cam = cams[rand.randi_range(0, cams.size() - 1)] 
+		var old_cam = $SubViewport.get_child(0)
+		
+		$SubViewport.remove_child(old_cam)
+		$CameraStorage.remove_child(new_cam)
+		
+		$SubViewport.add_child(new_cam)
+		$CameraStorage.add_child(old_cam)
+		
+		new_cam.get_node(\"CanvasLayer/ColorRect\").material.set_shader_parameter(\"white_noise_rate\", 1)
+		
+		$Television/SwapStaticTimer.start(0.2)
+		
 	if event is InputEventMouseButton and event.is_pressed():
 		var cam_pos = $Player.position
 		var plane_pos = $Player/Camera3D.project_position(event.position, 10)
@@ -39,6 +57,9 @@ func _input(event):
 			pin_instance.position = result[\"position\"]
 			pin_instance.rotate_y(-83)
 			add_child(pin_instance)
+
+func _on_swap_static_timer_timeout():
+	new_cam.get_node(\"CanvasLayer/ColorRect\").material.set_shader_parameter(\"white_noise_rate\", 0.17)
 "
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t2cjy"]
@@ -85,17 +106,6 @@ size = Vector3(0.275727, 0.409727, 0.0154504)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cben6"]
 size = Vector3(2.07906, 1.54385, 0.0249659)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xoja"]
-shader = ExtResource("4_kkfxb")
-shader_parameter/pixel_size = 4.0
-shader_parameter/zoom = 1.0
-shader_parameter/crt_curve = 0.02
-shader_parameter/brightness = 3.096
-shader_parameter/crt_scan_line_color = 0.347
-shader_parameter/aperture_grille_rate = 0.4
-shader_parameter/rf_switch_esque_blur = 1.0
-shader_parameter/white_noise_rate = 0.17
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5dlf"]
 resource_local_to_scene = true
@@ -229,22 +239,35 @@ omni_range = 8.90298
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394973, 2.18065, 0.436773)
 script = ExtResource("3_oveuh")
 
+[node name="CameraStorage" type="SubViewport" parent="."]
+
+[node name="CCTVKitchen" parent="CameraStorage" instance=ExtResource("5_rshed")]
+transform = Transform3D(0.663127, -0.513728, 0.544376, -0.00855468, 0.722034, 0.691805, -0.748458, -0.463412, 0.474406, 17.597, 3.32392, -2.41769)
+fov = 102.557
+
+[node name="CCTVGameRoom" parent="CameraStorage" instance=ExtResource("5_rshed")]
+transform = Transform3D(0.806182, 0.404827, -0.431493, -0.00853655, 0.737165, 0.675659, 0.591606, -0.541021, 0.597745, 11.8315, 3.32292, 7.1301)
+fov = 79.923
+
+[node name="CCTVLivingRoom" parent="CameraStorage" instance=ExtResource("5_rshed")]
+transform = Transform3D(0.933436, 0.226931, -0.277848, -0.0110855, 0.792379, 0.609928, 0.358572, -0.566249, 0.742151, 19.9109, 3.32415, 7.33906)
+fov = 69.7491
+
+[node name="CCTVBathroom" parent="CameraStorage" instance=ExtResource("5_rshed")]
+transform = Transform3D(0.793576, -0.313769, 0.521331, -0.0332189, 0.83317, 0.552018, -0.607564, -0.455387, 0.650761, 32.0786, 3.32631, 7.26561)
+fov = 72.2529
+
+[node name="CCTVDiningRoom" parent="CameraStorage" instance=ExtResource("5_rshed")]
+transform = Transform3D(0.550616, -0.49603, 0.671399, -0.00857312, 0.8009, 0.598736, -0.834714, -0.33543, 0.436736, 32.1461, 3.32634, 0.718902)
+fov = 79.4577
+
 [node name="SubViewport" type="SubViewport" parent="."]
 render_target_update_mode = 4
 
-[node name="CCTV" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(-0.863315, -0.271334, 0.425517, -0.00866886, 0.851016, 0.525068, -0.504591, 0.44961, -0.737047, 25.1703, 3.19899, -7.5194)
-fov = 120.4
-
-[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport/CCTV"]
-
-[node name="ColorRect" type="ColorRect" parent="SubViewport/CCTV/CanvasLayer"]
-material = SubResource("ShaderMaterial_5xoja")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CCTVFoyer" parent="SubViewport" instance=ExtResource("5_rshed")]
+transform = Transform3D(-0.863315, -0.369868, 0.343343, -0.00866887, 0.691107, 0.722701, -0.504591, 0.620942, -0.599849, 25.1703, 3.19899, -7.5194)
+current = true
+fov = 100.83
 
 [node name="Television" parent="." instance=ExtResource("6_amud6")]
 transform = Transform3D(1.53209, 0, -1.28558, 0, 2, 0, 1.28558, 0, 1.53209, 1, 1.2, -1.2)
@@ -255,5 +278,10 @@ material_override = SubResource("StandardMaterial3D_s5dlf")
 mesh = SubResource("PlaneMesh_uo1h5")
 skeleton = NodePath("")
 
+[node name="SwapStaticTimer" type="Timer" parent="Television"]
+one_shot = true
+
 [node name="House" parent="." instance=ExtResource("8_kko80")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, 0)
+
+[connection signal="timeout" from="Television/SwapStaticTimer" to="." method="_on_swap_static_timer_timeout"]
