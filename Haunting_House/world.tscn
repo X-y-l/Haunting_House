@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=29 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
+[ext_resource type="PackedScene" uid="uid://co6f4pwx3qajl" path="res://pin.tscn" id="2_7eaf6"]
 [ext_resource type="Texture2D" uid="uid://cuwb8whbqnqfp" path="res://cctv-texture.tres" id="2_606cp"]
 [ext_resource type="PackedScene" uid="uid://cy1wqcy0vt3ew" path="res://map_man.tscn" id="2_wq4ct"]
 [ext_resource type="Script" path="res://player.gd" id="3_oveuh"]
@@ -12,6 +13,9 @@
 [sub_resource type="GDScript" id="GDScript_xg0o6"]
 script/source = "extends Node3D
 
+@export var carrying_pin: Node3D = null
+var carrying_dest = null
+
 var pin = preload(\"res://pin.tscn\")
 var new_cam = null
 
@@ -21,26 +25,69 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if carrying_dest != null and carrying_pin != null and !carrying_pin.placed:
+		carrying_pin.global_position = lerp(carrying_pin.global_position, carrying_dest, 0.2)
 
 func _input(event):
 	if event is InputEventMouseMotion:
+		_update_cctv_selection(event)
+		_update_carrying_pin(event)
+	
+	if event is InputEventMouseButton and event.is_pressed():
 		var cam_pos = $Player.position
 		var plane_pos = $Player/Camera3D.project_position(event.position, 10)
 		var delta = (plane_pos - cam_pos).normalized()
-		
 		var query = PhysicsRayQueryParameters3D.create(cam_pos, plane_pos)
 		query.collide_with_areas = true
-		query.collision_mask = 2
-		
-		var result = get_world_3d().direct_space_state.intersect_ray(query)
-		if !result.is_empty():
-			var area: Node3D = result[\"collider\"]
-			var cam_path = area.get_meta(\"cctv\")
-			var cam = area.get_node(cam_path)
-			switch_to_cctv(cam)
+				
+		if carrying_pin != null:
+			if !carrying_pin.placed:
+				query.collision_mask = 2
+				var result = get_world_3d().direct_space_state.intersect_ray(query)
+				if !result.is_empty():
+					carrying_pin.place(result[\"collider\"])
+					carrying_pin = null
+				else:
+					carrying_pin.drop()
+					carrying_pin = null
+		else:
+			query.collision_mask = 8
+			var result = get_world_3d().direct_space_state.intersect_ray(query)
+			if !result.is_empty():
+				var sel_area = result[\"collider\"]
+				var pin = sel_area.get_parent()
+				carrying_pin = pin
 
-func switch_to_cctv(cam_node):
+func _update_cctv_selection(event):
+	var cam_pos = $Player.position
+	var plane_pos = $Player/Camera3D.project_position(event.position, 10)
+	var delta = (plane_pos - cam_pos).normalized()
+	
+	var query = PhysicsRayQueryParameters3D.create(cam_pos, plane_pos)
+	query.collide_with_areas = true
+	query.collision_mask = 2
+	
+	var result = get_world_3d().direct_space_state.intersect_ray(query)
+	if !result.is_empty():
+		var area: Node3D = result[\"collider\"]
+		var cam_path = area.get_meta(\"cctv\")
+		var cam = area.get_node(cam_path)
+		_switch_to_cctv(cam)
+		
+func _update_carrying_pin(event):
+	var cam_pos = $Player.position
+	var plane_pos = $Player/Camera3D.project_position(event.position, 10)
+	var delta = (plane_pos - cam_pos).normalized()
+	
+	var query = PhysicsRayQueryParameters3D.create(cam_pos, plane_pos)
+	query.collide_with_areas = true
+	query.collision_mask = 4
+	
+	var result = get_world_3d().direct_space_state.intersect_ray(query)
+	if !result.is_empty():
+		carrying_dest = result[\"position\"] + result[\"normal\"] * 0.02
+
+func _switch_to_cctv(cam_node):
 	if new_cam == cam_node or cam_node == null:
 		return
 	
@@ -107,7 +154,7 @@ size = Vector3(0.341625, 0.384198, 0.0154504)
 size = Vector3(0.275727, 0.409727, 0.0154504)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cben6"]
-size = Vector3(2.07906, 1.54385, 0.0249659)
+size = Vector3(2.78383, 2.05376, 0.0249659)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5dlf"]
 resource_local_to_scene = true
@@ -158,7 +205,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01548, 3.23815, 0.165093)
 size = Vector3(0.431957, 7.42956, 12.9889)
 
 [node name="Desk" type="CSGBox3D" parent="Room"]
-transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.2634, 0.695194, -1.26953)
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.264087, 0.695194, -1.32313)
 size = Vector3(4.26017, 1, 1.4707)
 material = SubResource("StandardMaterial3D_hd2k0")
 
@@ -171,18 +218,15 @@ transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0
 shape = SubResource("BoxShape3D_nw2n8")
 
 [node name="Board" type="CSGBox3D" parent="Room"]
-transform = Transform3D(-1, 2.445e-16, -2.445e-16, -3.48787e-16, -0.701, 2.445e-16, 3.48787e-16, -2.445e-16, -0.701, -0.67193, 2.73878, -1.97125)
+transform = Transform3D(-1, 3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 3.48787e-16, 3.48787e-16, -3.48787e-16, -1, -0.67193, 2.73878, -1.97125)
 material_override = SubResource("StandardMaterial3D_xej8x")
-size = Vector3(2.7704, 2.61626, 0.0253594)
+size = Vector3(2.7704, 2.05614, 0.0253594)
 
 [node name="SpriteLayer" type="Node3D" parent="Room/Board"]
 transform = Transform3D(1, -2.29598e-26, -2.86997e-09, 6.30152e-25, 1, 1.0698e-23, -2.08346e-09, -3.01228e-25, 1, 0.00509775, 0, -0.0415187)
 
-[node name="MapMan" parent="Room/Board/SpriteLayer" instance=ExtResource("2_wq4ct")]
-transform = Transform3D(-0.01, 3.48787e-18, -8.6781e-10, 3.48787e-18, 0.01, -3.48787e-18, 1.85028e-09, -3.48787e-18, -0.01, 0.521631, -0.244265, 0.0163864)
-
 [node name="RoomBounds" type="Node3D" parent="Room/Board"]
-transform = Transform3D(1.32693, 7.94093e-23, -3.85049e-23, 2.74756e-23, 1.67583, -4.77432e-23, -2.91169e-22, 7.85541e-23, 1, 0, 0, 0)
+transform = Transform3D(1.16181, 1.05879e-22, -4.15786e-23, -1.13014e-23, 1.11906, -3.78307e-23, -2.91168e-22, 2.64698e-23, 1, 0.0498917, -0.335002, 0)
 
 [node name="LivingRoom" type="Area3D" parent="Room/Board/RoomBounds"]
 transform = Transform3D(1, -3.48787e-16, -2.86997e-09, 3.48787e-16, 1, -3.48787e-16, -2.08346e-09, 3.48787e-16, 1, 0.552881, -0.228778, -0.00446403)
@@ -239,10 +283,35 @@ transform = Transform3D(1, -2.28759e-26, -2.86997e-09, 6.30102e-25, 1, 1.06982e-
 shape = SubResource("BoxShape3D_1q4xj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Room/Board"]
+collision_layer = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Board/StaticBody3D"]
 transform = Transform3D(1, -2.29598e-26, -2.86997e-09, 6.30152e-25, 1, 1.0698e-23, -2.08346e-09, -3.01228e-25, 1, 0.000898004, 0.00174451, 0.00103378)
 shape = SubResource("BoxShape3D_cben6")
+
+[node name="Pin1" parent="Room/Board" instance=ExtResource("2_7eaf6")]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 1.06782, 0.523019, -0.0278265)
+
+[node name="MapMan" parent="Room/Board/Pin1" instance=ExtResource("2_wq4ct")]
+transform = Transform3D(-1.434e-09, 6.97574e-18, 0.01, 1.58404e-24, 0.01, -6.97574e-18, -0.01, 1.291e-24, -4.01997e-10, 0.0130442, 0.0452294, -1.19209e-07)
+
+[node name="Pin2" parent="Room/Board" instance=ExtResource("2_7eaf6")]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0.748019, 0.523019, -0.0278265)
+
+[node name="MapMan" parent="Room/Board/Pin2" instance=ExtResource("2_wq4ct")]
+transform = Transform3D(-1.434e-09, 6.97574e-18, 0.01, 1.58404e-24, 0.01, -6.97574e-18, -0.01, 1.291e-24, -4.01997e-10, 0.0130442, 0.0452294, -1.19209e-07)
+
+[node name="Pin3" parent="Room/Board" instance=ExtResource("2_7eaf6")]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0.422527, 0.523019, -0.0278265)
+
+[node name="MapMan" parent="Room/Board/Pin3" instance=ExtResource("2_wq4ct")]
+transform = Transform3D(-1.434e-09, 6.97574e-18, 0.01, 1.58404e-24, 0.01, -6.97574e-18, -0.01, 1.291e-24, -4.01997e-10, 0.0130442, 0.0452294, -1.19209e-07)
+
+[node name="Pin4" parent="Room/Board" instance=ExtResource("2_7eaf6")]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0.106945, 0.523019, -0.0278265)
+
+[node name="MapMan" parent="Room/Board/Pin4" instance=ExtResource("2_wq4ct")]
+transform = Transform3D(-1.434e-09, 6.97574e-18, 0.01, 1.58404e-24, 0.01, -6.97574e-18, -0.01, 1.291e-24, -4.01997e-10, 0.0130442, 0.0452294, -1.19209e-07)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.638392, 4.04129, 0.305518)

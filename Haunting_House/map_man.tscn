@@ -5,11 +5,14 @@
 
 [node name="MapMan" type="Sprite3D"]
 transform = Transform3D(-0.01, 3.48787e-18, -8.74228e-10, 3.48787e-18, 0.01, -3.48787e-18, 8.74228e-10, -3.48787e-18, -0.01, 0, 0, 0)
-flip_v = true
 texture = ExtResource("1_08lqp")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0277929)
-flip_v = true
+modulate = Color(0.803922, 0.211765, 0.356863, 1)
+texture = ExtResource("2_5bpog")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, -1.1321e-22, 2.52249e-15, 1.11854e-23, 1, -1.13675e-22, 2.66454e-15, 1.09188e-22, 1, 2.08166e-12, 2.08165e-12, -0.028)
 modulate = Color(0.803922, 0.211765, 0.356863, 1)
 texture = ExtResource("2_5bpog")
