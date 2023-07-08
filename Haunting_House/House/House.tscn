@@ -9,36 +9,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="hauntedmansion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 2.1, -4.2)
-light_color = Color(1, 0.721569, 0.501961, 1)
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="hauntedmansion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -5)
-light_color = Color(1, 0.721569, 0.501961, 1)
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="hauntedmansion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.87905, 4, -5)
-light_color = Color(1, 0.721569, 0.501961, 1)
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="hauntedmansion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.87905, 4, 5.0169)
-light_color = Color(1, 0.721569, 0.501961, 1)
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="hauntedmansion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.87905, 4, 0.740966)
-light_color = Color(1, 0.721569, 0.501961, 1)
 
 [node name="OmniLight3D6" type="OmniLight3D" parent="hauntedmansion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00999486, 4, 4.25292)
-light_color = Color(1, 0.721569, 0.501961, 1)
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="hauntedmansion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9909, 4, 4.9565)
-light_color = Color(1, 0.721569, 0.501961, 1)
 
 [node name="OmniLight3D8" type="OmniLight3D" parent="hauntedmansion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9909, 4, -0.854478)
-light_color = Color(1, 0.721569, 0.501961, 1)
 
 [node name="OmniLight3D9" type="OmniLight3D" parent="hauntedmansion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9909, 4, -5.12408)
-light_color = Color(1, 0.721569, 0.501961, 1)
