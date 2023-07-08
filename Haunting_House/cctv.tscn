@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8fa0otl7lb11"]
+[gd_scene load_steps=4 format=3 uid="uid://c8fa0otl7lb11"]
 
 [ext_resource type="Shader" path="res://CRT.gdshader" id="1_67ryx"]
+[ext_resource type="Script" path="res://cctv.gd" id="1_ftxgb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5xoja"]
 shader = ExtResource("1_67ryx")
@@ -16,6 +17,8 @@ shader_parameter/white_noise_rate = 0.17
 [node name="CCTV" type="Camera3D"]
 transform = Transform3D(-0.863315, -0.271334, 0.425517, -0.00866886, 0.851016, 0.525068, -0.504591, 0.44961, -0.737047, 25.1703, 3.19899, -7.5194)
 fov = 120.4
+script = ExtResource("1_ftxgb")
+move_speed = 0.3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
