@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnivx8xyj7l4b"]
+
+[ext_resource type="PackedScene" uid="uid://bbgl3t4f74tab" path="res://House/hauntedmansion.glb" id="1_unwwc"]
+
+[node name="House" type="Node3D"]
+
+[node name="hauntedmansion" parent="." instance=ExtResource("1_unwwc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="hauntedmansion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 2.1, -4.2)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="hauntedmansion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -5)

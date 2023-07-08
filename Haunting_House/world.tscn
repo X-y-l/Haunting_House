@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=28 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://player.gd" id="3_oveuh"]
 [ext_resource type="Shader" path="res://CRT.gdshader" id="4_kkfxb"]
 [ext_resource type="PackedScene" uid="uid://b58qoqeeyhrl4" path="res://TV/Television.glb" id="6_amud6"]
+[ext_resource type="PackedScene" uid="uid://cnivx8xyj7l4b" path="res://House/House.tscn" id="8_kko80"]
 
 [sub_resource type="GDScript" id="GDScript_xg0o6"]
 script/source = "extends Node3D
@@ -232,8 +233,8 @@ script = ExtResource("3_oveuh")
 render_target_update_mode = 4
 
 [node name="CCTV" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(0.996738, -0.0403515, -0.0698908, 0, 0.866025, -0.5, 0.0807029, 0.498369, 0.863201, -2.26208, 0.933316, 0.226915)
-fov = 59.7
+transform = Transform3D(-0.863315, -0.271334, 0.425517, -0.00866886, 0.851016, 0.525068, -0.504591, 0.44961, -0.737047, 25.1703, 3.19899, -7.5194)
+fov = 120.4
 
 [node name="CanvasLayer" type="CanvasLayer" parent="SubViewport/CCTV"]
 
@@ -253,3 +254,6 @@ transform = Transform3D(0.29, 0, 0, 0, -1.39876e-08, -0.3, 0, 0.32, -1.31134e-08
 material_override = SubResource("StandardMaterial3D_s5dlf")
 mesh = SubResource("PlaneMesh_uo1h5")
 skeleton = NodePath("")
+
+[node name="House" parent="." instance=ExtResource("8_kko80")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, 0)
