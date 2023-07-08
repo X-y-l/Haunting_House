@@ -1,2 +1,0 @@
-ViewportTexture
-StandardMaterial3D

@@ -19,3 +19,7 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=2500
 window/size/viewport_height=1800
+
+[physics]
+
+3d/default_gravity=7.0
