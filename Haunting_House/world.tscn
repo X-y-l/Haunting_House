@@ -171,7 +171,7 @@ transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0
 shape = SubResource("BoxShape3D_nw2n8")
 
 [node name="Board" type="CSGBox3D" parent="Room"]
-transform = Transform3D(-1, 3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 3.48787e-16, 3.48787e-16, -3.48787e-16, -1, -0.38171, 2.46412, -1.97125)
+transform = Transform3D(-1, 3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 3.48787e-16, 3.48787e-16, -3.48787e-16, -1, -0.38171, 2.61493, -1.97125)
 material_override = SubResource("StandardMaterial3D_xej8x")
 size = Vector3(2.07893, 1.54457, 0.0253594)
 
@@ -244,10 +244,15 @@ transform = Transform3D(1, -2.29598e-26, -2.86997e-09, 6.30152e-25, 1, 1.0698e-2
 shape = SubResource("BoxShape3D_cben6")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41018, 6.14332, -0.000244379)
-light_color = Color(1, 0.921569, 0.788235, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.638392, 4.04129, 0.305518)
+light_color = Color(1, 0.898039, 0.690196, 1)
 light_energy = 2.814
-omni_range = 8.90298
+light_size = 1.0
+shadow_enabled = true
+shadow_opacity = 0.79
+shadow_blur = 2.869
+omni_range = 7.527
+omni_attenuation = 2.63901
 
 [node name="Player" parent="." instance=ExtResource("1_x7o30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394973, 2.18065, 0.244332)
@@ -284,10 +289,10 @@ fov = 79.4577
 render_target_update_mode = 4
 
 [node name="Television" parent="." instance=ExtResource("6_amud6")]
-transform = Transform3D(1.81759, 0, -0.834501, 0, 2, 0, 0.834502, 0, 1.81759, 0.59397, 1.2, -1.22901)
+transform = Transform3D(1.81759, 0, -0.834501, 0, 2, 0, 0.834502, 0, 1.81759, 0.444779, 1.2, -1.22901)
 
 [node name="Screen" type="MeshInstance3D" parent="Television"]
-transform = Transform3D(0.29, 0, 0, 0, -1.39876e-08, -0.3, 0, 0.32, -1.31134e-08, -0.07, 0.26, 0.181)
+transform = Transform3D(0.29, -1.65349e-09, -3.12016e-17, 0, -1.39876e-08, -0.3, -1.56552e-08, 0.32, -1.31134e-08, -0.07, 0.26, 0.181)
 material_override = SubResource("StandardMaterial3D_s5dlf")
 mesh = SubResource("PlaneMesh_uo1h5")
 skeleton = NodePath("")
