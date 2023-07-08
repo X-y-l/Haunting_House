@@ -1,10 +1,15 @@
-fc8a56933c4b1c8d796fdb8f7a9f9475
-::res://::1688816322
-board.png::CompressedTexture2D::1329482897324596363::1688813674::1688816324::1::::<><>::
-cctv-texture.tres::ViewportTexture::6222155365322473409::1688815000::0::1::::<><>::
-CRT.gdshader::Shader::-1::1688816015::0::1::::<><>::
-icon.svg::CompressedTexture2D::4992065178664007652::1688805645::1688805663::1::::<><>::
-player.tscn::PackedScene::2785330218588578518::1688812788::0::1::::<><>::
-player.gd::GDScript::-1::1688816322::0::1::::<>Node3D<>::
-screen.gd::GDScript::-1::1688812051::0::1::::<>MeshInstance3D<>::
-world.tscn::PackedScene::3037725412940749262::1688816289::0::1::::<><>::uid://s7anh1ml1vfn<>uid://bfxh8m6a8md55<>uid://cuwb8whbqnqfp<>res://player.gd<>res://CRT.gdshader
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1688822497
+board.png::CompressedTexture2D::1329482897324596363::1688815283::1688819885::1::::<><>::
+cctv-texture.tres::ViewportTexture::6222155365322473409::1688815283::0::1::::<><>::
+CRT.gdshader::Shader::-1::1688817392::0::1::::<><>::
+icon.svg::CompressedTexture2D::4992065178664007652::1688812234::1688815169::1::::<><>::
+player.gd::GDScript::-1::1688815283::0::1::::<>Node3D<>::
+player.tscn::PackedScene::2785330218588578518::1688817590::0::1::::<><>::
+note.tscn::PackedScene::7422602965313763551::1688822132::0::1::::<><>::
+screen.gd::GDScript::-1::1688815283::0::1::::<>MeshInstance3D<>::
+world.gd::GDScript::-1::1688819885::0::1::::<>Node3D<>::
+world.tscn::PackedScene::2136603721217516927::1688817590::0::1::::<><>::uid://s7anh1ml1vfn::::res://board.png<>uid://bfxh8m6a8md55::::res://player.tscn<>uid://cuwb8whbqnqfp::::res://cctv-texture.tres<>res://player.gd<>res://CRT.gdshader
+::res://Fonts/::1688829547
+Breathing.ttf::FontFile::8408251472545524298::1598917880::1688822582::1::::<><>::
+Get Show.ttf::FontFile::3052121243186653013::1546713368::1688829549::1::::<><>::
