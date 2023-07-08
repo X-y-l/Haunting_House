@@ -1,3 +1,6 @@
+CollisionShape3D
+CollisionPolygon3D
+Area3D
 CanvasLayer
 ColorRect
 CSGBox3D
