@@ -1,6 +1,8 @@
 fc8a56933c4b1c8d796fdb8f7a9f9475
-::res://::1688807306
+::res://::1688813677
+board.png::CompressedTexture2D::1329482897324596363::1688813674::1688813681::1::::<><>::
+cctv-texture.tres::ViewportTexture::6222155365322473409::1688812102::0::1::::<><>::
 icon.svg::CompressedTexture2D::4992065178664007652::1688805645::1688805663::1::::<><>::
-player.tscn::PackedScene::2785330218588578518::1688807112::0::1::::<><>::
-television.tscn::PackedScene::320135643044762112::1688807306::0::1::::<><>::
-world.tscn::PackedScene::2136603721217516927::1688807112::0::1::::<><>::uid://bfxh8m6a8md55
+player.tscn::PackedScene::2785330218588578518::1688812788::0::1::::<><>::
+screen.gd::GDScript::-1::1688812051::0::1::::<>MeshInstance3D<>::
+world.tscn::PackedScene::3037725412940749262::1688813508::0::1::::<><>::uid://bfxh8m6a8md55<>uid://cuwb8whbqnqfp
