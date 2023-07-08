@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://5o8s0dqrhast"]
+[gd_scene load_steps=10 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
+[ext_resource type="Texture2D" uid="uid://cuwb8whbqnqfp" path="res://cctv-texture.tres" id="2_606cp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t2cjy"]
 
@@ -12,6 +13,21 @@ background_mode = 1
 background_color = Color(0.0235294, 0.0235294, 0.0156863, 1)
 background_energy_multiplier = 2.38
 sky = SubResource("Sky_o6po7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hd2k0"]
+albedo_color = Color(1, 0, 0.298039, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5dlf"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("2_606cp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gqs5b"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("2_606cp")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uo1h5"]
+material = SubResource("StandardMaterial3D_gqs5b")
+size = Vector2(1.5, 1)
 
 [node name="World" type="Node3D"]
 
@@ -43,10 +59,29 @@ size = Vector3(0.431957, 7.42956, 12.9889)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01548, 3.23815, 0.165093)
 size = Vector3(0.431957, 7.42956, 12.9889)
 
+[node name="Box (testing)" type="CSGBox3D" parent="Room"]
+transform = Transform3D(0.688355, 1.2912e-17, 0.725374, 3.48787e-16, 1, -3.48787e-16, -0.725374, 4.9309e-16, 0.688355, -5.46816, 0.654087, 0.0451229)
+size = Vector3(0.653975, 1, 1.70544)
+material = SubResource("StandardMaterial3D_hd2k0")
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41129, 6.14221, 0)
 light_color = Color(1, 0.921569, 0.788235, 1)
-light_energy = 0.39
+light_energy = 2.814
 omni_range = 8.90298
 
 [node name="Player" parent="." instance=ExtResource("1_x7o30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.900809, 1.26285)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+render_target_update_mode = 4
+
+[node name="CCTV" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -2.26208, 0.933316, 0.226915)
+fov = 59.7
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.283321, 0.861555, -2.24543)
+material_override = SubResource("StandardMaterial3D_s5dlf")
+mesh = SubResource("PlaneMesh_uo1h5")
+skeleton = NodePath("")
