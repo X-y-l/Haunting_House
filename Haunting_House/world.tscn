@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=15 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
 [ext_resource type="Texture2D" uid="uid://cuwb8whbqnqfp" path="res://cctv-texture.tres" id="2_606cp"]
 [ext_resource type="Script" path="res://player.gd" id="3_oveuh"]
+[ext_resource type="Shader" path="res://CRT.gdshader" id="4_kkfxb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t2cjy"]
 
@@ -21,6 +22,16 @@ albedo_color = Color(0.529412, 0.313726, 0.164706, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xej8x"]
 albedo_texture = ExtResource("1_6lrts")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xoja"]
+shader = ExtResource("4_kkfxb")
+shader_parameter/pixel_size = 8.0
+shader_parameter/zoom = 1.0
+shader_parameter/crt_curve = 0.02
+shader_parameter/crt_scan_line_color = 0.347
+shader_parameter/aperture_grille_rate = 0.4
+shader_parameter/rf_switch_esque_blur = 1.0
+shader_parameter/white_noise_rate = 0.17
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5dlf"]
 resource_local_to_scene = true
@@ -88,8 +99,18 @@ script = ExtResource("3_oveuh")
 render_target_update_mode = 4
 
 [node name="CCTV" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, -2.26208, 0.933316, 0.226915)
+transform = Transform3D(0.335928, 2.11351e-16, 0.941888, 3.48787e-16, 1, -3.48787e-16, -0.941888, 4.45686e-16, 0.335928, -2.26208, 0.933316, 0.226915)
 fov = 59.7
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport/CCTV"]
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/CCTV/CanvasLayer"]
+material = SubResource("ShaderMaterial_5xoja")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Screen" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.947768, -0.318959, 1.39422e-08, -1.5246e-23, -4.37114e-08, -1, 0.318959, 0.947768, -4.14283e-08, 1.28145, 1.68746, -1.32072)

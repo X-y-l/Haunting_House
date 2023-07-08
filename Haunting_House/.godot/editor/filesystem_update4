@@ -1,10 +1,2 @@
 res://world.tscn
-res://player.tscn
-res://television.tscn
-res://materials/cctv.tres
-res://materials/cctv-texture.tres
-res://world.gd
-res://screen.gd
-res://cctv-texture.tres
-res://CCTV.gd
-res://player.gd
+res://CRT.gdshader
