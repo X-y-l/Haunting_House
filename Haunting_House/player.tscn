@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfxh8m6a8md55"]
+[gd_scene load_steps=4 format=3 uid="uid://bfxh8m6a8md55"]
 
 [ext_resource type="Script" path="res://SubViewport.gd" id="1_ne68e"]
+[ext_resource type="Script" path="res://Control.gd" id="2_4b2qu"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5384d"]
 viewport_path = NodePath("Camera3D/Sprite3D/SubViewport")
@@ -18,12 +19,24 @@ transparent_bg = true
 size = Vector2i(512, 25)
 script = ExtResource("1_ne68e")
 
-[node name="Label" type="Label" parent="Camera3D/Sprite3D/SubViewport"]
+[node name="Control" type="Control" parent="Camera3D/Sprite3D/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 40.0
+script = ExtResource("2_4b2qu")
+full_text = "Hello? Hello? Hey, you with the lanyard! I, uh, just wanted to record a message to get you settled in on your first night. It's cheaper and easier than training each employee individually."
+
+[node name="Label" type="Label" parent="Camera3D/Sprite3D/SubViewport/Control"]
+offset_right = 1785.0
+offset_bottom = 210.0
 theme_override_font_sizes/font_size = 48
-text = "Hello? Hello? Hey, you with the lanyard! 
-I, uh, just wanted to record a message to get you settled in on your first night. 
-It's cheaper and easier than training each employee individually."
 horizontal_alignment = 1
+autowrap_mode = 3
 max_lines_visible = 3
+
+[node name="Timer" type="Timer" parent="Camera3D/Sprite3D/SubViewport/Control"]
+wait_time = 0.007
+autostart = true
+
+[connection signal="timeout" from="Camera3D/Sprite3D/SubViewport/Control/Timer" to="Camera3D/Sprite3D/SubViewport/Control" method="_on_timer_timeout"]
