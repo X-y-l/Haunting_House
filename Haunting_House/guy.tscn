@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cou1qardtod61"]
+[gd_scene load_steps=4 format=3 uid="uid://cou1qardtod61"]
 
 [ext_resource type="Texture2D" uid="uid://cdg2f28fbetwb" path="res://Guys/adult2.png" id="1_e018b"]
 [ext_resource type="Script" path="res://guy.gd" id="1_xyqne"]
 
-[node name="Guy" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wom07"]
+radius = 0.68532
+height = 3.70407
+
+[node name="Guy" type="StaticBody3D"]
 script = ExtResource("1_xyqne")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -15,5 +19,9 @@ texture = ExtResource("1_e018b")
 [node name="MoveTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.605499, 0)
+shape = SubResource("CapsuleShape3D_wom07")
 
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

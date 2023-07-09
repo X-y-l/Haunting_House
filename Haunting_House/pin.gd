@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+signal on_placed(area)
+
 var placed: bool = false
 @export var drop_time: float = 5
 var reset_position = null
@@ -28,11 +30,15 @@ func place(object):
 	if placed:
 		return
 
-
 	self.freeze = true
 	self.placed = true
 	$DropTimer.start(drop_time)
-	print("placed for ", drop_time, " seconds in ", object)
+	
+	var room_area_path = object.get_meta("room_area")
+	var room_area = object.get_node(room_area_path)
+	
+	print("placed for ", drop_time, " seconds in ", object, " which corresponds to ", room_area)
+	emit_signal("on_placed", room_area)
 
 func drop():
 	self.freeze = false
