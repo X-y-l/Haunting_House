@@ -22,6 +22,7 @@ var carrying_dest = null
 
 var pin = preload(\"res://pin.tscn\")
 var new_cam = null
+var last_pin = null
 
 func _ready():
 	pass # Replace with function body.
@@ -34,6 +35,22 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		_update_cctv_selection(event)
 		_update_carrying_pin(event)
+		if carrying_pin == null:
+			print(\"Sanity check\")
+			var cam_pos = $Player.position
+			var plane_pos = $Player/Camera3D.project_position(event.position, 10)
+			var query = PhysicsRayQueryParameters3D.create(cam_pos, plane_pos)
+			query.collide_with_areas = true
+			query.collision_mask = 8
+			var result = get_world_3d().direct_space_state.intersect_ray(query)
+			if !result.is_empty():
+				print(\"Is full\")
+				var sel_area = result[\"collider\"]
+				var pin = sel_area.get_parent()
+				pin.pin_hover = true
+				last_pin = pin
+			elif last_pin != null:
+				last_pin.pin_hover = false
 	
 	if event is InputEventMouseButton and event.is_pressed():
 		var cam_pos = $Player.position

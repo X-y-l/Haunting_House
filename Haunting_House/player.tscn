@@ -28,6 +28,7 @@ script = ExtResource("2_4b2qu")
 full_text = "Hello? Hello? Hey, you with the lanyard! I, uh, just wanted to record a message to get you settled in on your first night. It's cheaper and easier than training each employee individually."
 
 [node name="Label" type="Label" parent="Camera3D/Sprite3D/SubViewport/Control"]
+layout_mode = 0
 offset_right = 1785.0
 offset_bottom = 210.0
 theme_override_font_sizes/font_size = 48
