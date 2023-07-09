@@ -31,19 +31,42 @@ func _update_target():
 		if rng.randf() < go_to_new_room_prob:
 			var room_node = current_node.get_parent().get_parent()
 			var doors = room_node.doors
-			var door = room_node.get_node(doors[rng.randi_range(0, doors.size()-1)])
-			print("moving to new room: ", door)
+			
+			# TODO: this should only pick one which is connected to the node
+			var door = room_node.get_node(doors.pick_random())
+			
+			print("moving to new via ", door, " from ", room_node)
 			target_position = door.global_position
+			
 			var areas = door.get_overlapping_areas()
+			if areas.size() < 1:
+				return
+				
+			var new_area = areas[0]
+			
 			for area in areas:
-				if area != room_node:
-					var nodes = area.get_node("Nodes").get_children()
-					current_node = nodes[rng.randi_range(0, nodes.size() - 1)]
-					print("going to area: ", area, "; node = ", current_node)
+				if area == room_node:
+					continue
+				new_area = area
+				break
+				
+			var nodes = new_area.get_node("Nodes").get_children()
+			var connected_to_door = door.connected_nodes
+			while true:
+				current_node = nodes.pick_random()
+				var found = false
+				for conn in connected_to_door:
+					if door.get_node(conn) == current_node:
+						print("going to area: ", new_area, "; node = ", current_node)
+						found = true
+						break
+				if found:
+					break
 		elif rng.randf() < go_to_new_node_prob:
-			var nodes = current_node.get_parent().get_children()
+			var nodes = current_node.connected_nodes #current_node.get_parent().get_children()
 			if nodes.size() > 1:
-				var new_node = nodes[rng.randi_range(0, nodes.size()-1)]
+				var new_node_path = nodes[rng.randi_range(0, nodes.size()-1)]
+				var new_node = current_node.get_node(new_node_path)
 				
 				while new_node == current_node:
 					new_node = nodes[rng.randi_range(0, nodes.size()-1)]
