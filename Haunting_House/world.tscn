@@ -1,12 +1,18 @@
-[gd_scene load_steps=40 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=47 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
+[ext_resource type="PackedScene" uid="uid://267eckax1k7k" path="res://Cork/Board.glb" id="1_53l1l"]
+[ext_resource type="Texture2D" uid="uid://n2qvevapkrml" path="res://Bricks/rock_tile_floor_diff_4k.png" id="1_vjnwq"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
 [ext_resource type="PackedScene" uid="uid://co6f4pwx3qajl" path="res://pin.tscn" id="2_7eaf6"]
 [ext_resource type="Texture2D" uid="uid://cuwb8whbqnqfp" path="res://cctv-texture.tres" id="2_606cp"]
+[ext_resource type="Texture2D" uid="uid://bcugtiburbnhu" path="res://Bricks/rock_tile_floor_disp_4k.png" id="2_p7kkb"]
 [ext_resource type="PackedScene" uid="uid://cy1wqcy0vt3ew" path="res://map_man.tscn" id="2_wq4ct"]
+[ext_resource type="Texture2D" uid="uid://e0q3ajlkoxfn" path="res://Bricks/rock_tile_floor_nor_gl_4k.png" id="3_3v5ha"]
 [ext_resource type="Script" path="res://player.gd" id="3_oveuh"]
 [ext_resource type="Texture2D" uid="uid://bjiqqcubicxcw" path="res://button_icons.png" id="3_rygc6"]
+[ext_resource type="Texture2D" uid="uid://dme1xymjgyphl" path="res://Bricks/rock_tile_floor_rough_4k.png" id="4_8k426"]
+[ext_resource type="Script" path="res://OmniLight3D.gd" id="5_e5u3u"]
 [ext_resource type="PackedScene" uid="uid://c8fa0otl7lb11" path="res://cctv.tscn" id="5_rshed"]
 [ext_resource type="PackedScene" uid="uid://b58qoqeeyhrl4" path="res://TV/Television.glb" id="6_amud6"]
 [ext_resource type="PackedScene" uid="uid://cnivx8xyj7l4b" path="res://House/House.tscn" id="8_kko80"]
@@ -151,6 +157,18 @@ background_color = Color(0.0235294, 0.0235294, 0.0156863, 1)
 background_energy_multiplier = 2.38
 sky = SubResource("Sky_o6po7")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o232c"]
+albedo_texture = ExtResource("1_vjnwq")
+roughness_texture = ExtResource("4_8k426")
+normal_enabled = true
+normal_texture = ExtResource("3_3v5ha")
+heightmap_enabled = true
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("2_p7kkb")
+uv1_scale = Vector3(10, 5, 5)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_vxbb2"]
 size = Vector3(13.5146, 6.66346, 0.462163)
 
@@ -239,7 +257,8 @@ size = Vector3(14.492, 7.24662, 0.461444)
 
 [node name="Wall2" type="CSGBox3D" parent="Room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0344658, 3.45709, -2.20842)
-size = Vector3(14.492, 7.24662, 0.461444)
+size = Vector3(13.7, 7.247, 0.461)
+material = SubResource("StandardMaterial3D_o232c")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Room/Wall2"]
 
@@ -267,13 +286,16 @@ physics_material_override = SubResource("PhysicsMaterial_h4fdm")
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_nw2n8")
 
+[node name="Board2" parent="Room" instance=ExtResource("1_53l1l")]
+transform = Transform3D(-4.37114e-08, 0, -1.6, 0, 1.5, 0, 1, 0, -6.99382e-08, -0.7, 2.85, -1.97)
+
 [node name="Board" type="CSGBox3D" parent="Room"]
 transform = Transform3D(-1, 3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 3.48787e-16, 3.48787e-16, -3.48787e-16, -1, -0.67193, 2.73878, -1.97125)
 material_override = SubResource("StandardMaterial3D_xej8x")
 size = Vector3(2.7704, 2.05614, 0.0253594)
 
 [node name="SpriteLayer" type="Node3D" parent="Room/Board"]
-transform = Transform3D(1, -2.29598e-26, -2.86997e-09, 6.30152e-25, 1, 1.0698e-23, -2.08346e-09, -3.01228e-25, 1, 0.00509775, 0, -0.0415187)
+transform = Transform3D(1, -1.21652e-31, -2.86997e-09, -7.26684e-25, 1, 0, -2.08346e-09, 0, 1, 0.00509775, 0, -0.0415187)
 
 [node name="RoomBounds" type="Node3D" parent="Room/Board"]
 transform = Transform3D(1.16181, 1.05879e-22, -4.15786e-23, -1.13014e-23, 1.11906, -3.78307e-23, -2.91168e-22, 2.64698e-23, 1, 0.0498917, -0.335002, 0)
@@ -374,13 +396,17 @@ transform = Transform3D(-1.434e-09, 6.97574e-18, 0.01, 1.58404e-24, 0.01, -6.975
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.638392, 4.04129, 0.305518)
 light_color = Color(1, 0.898039, 0.690196, 1)
-light_energy = 2.814
+light_energy = 3.0
 light_size = 1.0
 shadow_enabled = true
 shadow_opacity = 0.79
 shadow_blur = 2.869
 omni_range = 7.527
 omni_attenuation = 2.29739
+script = ExtResource("5_e5u3u")
+
+[node name="LightTimer" type="Timer" parent="OmniLight3D"]
+autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_x7o30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394973, 2.18065, 0.244332)
@@ -525,6 +551,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0)
 shape = SubResource("BoxShape3D_saymm")
 
 [connection signal="on_placed" from="Room/Board/DripPin" to="." method="_on_drip_pin_on_placed"]
+[connection signal="timeout" from="OmniLight3D/LightTimer" to="OmniLight3D" method="_on_light_timer_timeout"]
 [connection signal="timeout" from="Television/SwapStaticTimer" to="." method="_on_swap_static_timer_timeout"]
 
 [editable path="House/Guys/Guy"]
