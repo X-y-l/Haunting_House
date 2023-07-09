@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=38 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
@@ -9,9 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://c8fa0otl7lb11" path="res://cctv.tscn" id="5_rshed"]
 [ext_resource type="PackedScene" uid="uid://b58qoqeeyhrl4" path="res://TV/Television.glb" id="6_amud6"]
 [ext_resource type="PackedScene" uid="uid://cnivx8xyj7l4b" path="res://House/House.tscn" id="8_kko80"]
-[ext_resource type="PackedScene" uid="uid://cou1qardtod61" path="res://guy.tscn" id="10_3yq5n"]
-[ext_resource type="PackedScene" uid="uid://c07kuols1ql6y" path="res://location-node.tscn" id="11_gi3au"]
-[ext_resource type="PackedScene" uid="uid://cdjyvje0psojx" path="res://location-area.tscn" id="12_p13t5"]
+[ext_resource type="PackedScene" path="res://guy.tscn" id="10_3yq5n"]
+[ext_resource type="PackedScene" path="res://location-node.tscn" id="11_gi3au"]
+[ext_resource type="PackedScene" path="res://location-area.tscn" id="12_p13t5"]
+[ext_resource type="PackedScene" uid="uid://c68584u66uj1x" path="res://Radio/Radio.glb" id="13_4xqw8"]
 
 [sub_resource type="GDScript" id="GDScript_xg0o6"]
 script/source = "extends Node3D
@@ -465,6 +466,9 @@ shape = SubResource("CylinderShape3D_n1jsa")
 [node name="Foyer1" parent="House/Nodes/Foyer/Nodes" instance=ExtResource("11_gi3au")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60918, 2.60209e-18, -1.38978)
 connected_nodes = [NodePath("../Foyer2")]
+
+[node name="Radio" parent="." instance=ExtResource("13_4xqw8")]
+transform = Transform3D(-0.25, 0, 0.433013, 0, 0.5, 0, -0.433013, 0, -0.25, -1.25, 1.2, -1.43301)
 
 [connection signal="timeout" from="Television/SwapStaticTimer" to="." method="_on_swap_static_timer_timeout"]
 
