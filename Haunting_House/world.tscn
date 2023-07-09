@@ -1,12 +1,18 @@
-[gd_scene load_steps=39 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=47 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
+[ext_resource type="PackedScene" uid="uid://267eckax1k7k" path="res://Cork/Board.glb" id="1_53l1l"]
+[ext_resource type="Texture2D" uid="uid://n2qvevapkrml" path="res://Bricks/rock_tile_floor_diff_4k.png" id="1_vjnwq"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
 [ext_resource type="PackedScene" uid="uid://co6f4pwx3qajl" path="res://pin.tscn" id="2_7eaf6"]
 [ext_resource type="Texture2D" uid="uid://cuwb8whbqnqfp" path="res://cctv-texture.tres" id="2_606cp"]
+[ext_resource type="Texture2D" uid="uid://bcugtiburbnhu" path="res://Bricks/rock_tile_floor_disp_4k.png" id="2_p7kkb"]
 [ext_resource type="PackedScene" uid="uid://cy1wqcy0vt3ew" path="res://map_man.tscn" id="2_wq4ct"]
+[ext_resource type="Texture2D" uid="uid://e0q3ajlkoxfn" path="res://Bricks/rock_tile_floor_nor_gl_4k.png" id="3_3v5ha"]
 [ext_resource type="Script" path="res://player.gd" id="3_oveuh"]
 [ext_resource type="Texture2D" uid="uid://bjiqqcubicxcw" path="res://button_icons.png" id="3_rygc6"]
+[ext_resource type="Texture2D" uid="uid://dme1xymjgyphl" path="res://Bricks/rock_tile_floor_rough_4k.png" id="4_8k426"]
+[ext_resource type="Script" path="res://OmniLight3D.gd" id="5_e5u3u"]
 [ext_resource type="PackedScene" uid="uid://c8fa0otl7lb11" path="res://cctv.tscn" id="5_rshed"]
 [ext_resource type="PackedScene" uid="uid://b58qoqeeyhrl4" path="res://TV/Television.glb" id="6_amud6"]
 [ext_resource type="PackedScene" uid="uid://cnivx8xyj7l4b" path="res://House/House.tscn" id="8_kko80"]
@@ -23,6 +29,7 @@ var carrying_dest = null
 
 var pin = preload(\"res://pin.tscn\")
 var new_cam = null
+var last_pin = null
 
 func _ready():
 	pass # Replace with function body.
@@ -35,6 +42,20 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		_update_cctv_selection(event)
 		_update_carrying_pin(event)
+		if carrying_pin == null:
+			var cam_pos = $Player.position
+			var plane_pos = $Player/Camera3D.project_position(event.position, 10)
+			var query = PhysicsRayQueryParameters3D.create(cam_pos, plane_pos)
+			query.collide_with_areas = true
+			query.collision_mask = 8
+			var result = get_world_3d().direct_space_state.intersect_ray(query)
+			if !result.is_empty():
+				var sel_area = result[\"collider\"]
+				var pin = sel_area.get_parent()
+				pin.pin_hover = true
+				last_pin = pin
+			elif last_pin != null:
+				last_pin.pin_hover = false
 	
 	if event is InputEventMouseButton and event.is_pressed():
 		var cam_pos = $Player.position
@@ -149,6 +170,18 @@ background_color = Color(0.0235294, 0.0235294, 0.0156863, 1)
 background_energy_multiplier = 2.38
 sky = SubResource("Sky_o6po7")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o232c"]
+albedo_texture = ExtResource("1_vjnwq")
+roughness_texture = ExtResource("4_8k426")
+normal_enabled = true
+normal_texture = ExtResource("3_3v5ha")
+heightmap_enabled = true
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("2_p7kkb")
+uv1_scale = Vector3(10, 5, 5)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_vxbb2"]
 size = Vector3(13.5146, 6.66346, 0.462163)
 
@@ -213,6 +246,9 @@ size = Vector3(7.24606, 1, 6.45935)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_n1jsa"]
 radius = 0.978821
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_saymm"]
+size = Vector3(0.6, 0.8, 1.55)
+
 [node name="World" type="Node3D"]
 script = SubResource("GDScript_xg0o6")
 
@@ -234,7 +270,8 @@ size = Vector3(14.492, 7.24662, 0.461444)
 
 [node name="Wall2" type="CSGBox3D" parent="Room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0344658, 3.45709, -2.20842)
-size = Vector3(14.492, 7.24662, 0.461444)
+size = Vector3(13.7, 7.247, 0.461)
+material = SubResource("StandardMaterial3D_o232c")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Room/Wall2"]
 
@@ -262,13 +299,16 @@ physics_material_override = SubResource("PhysicsMaterial_h4fdm")
 transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_nw2n8")
 
+[node name="Board2" parent="Room" instance=ExtResource("1_53l1l")]
+transform = Transform3D(-4.37114e-08, 0, -1.6, 0, 1.5, 0, 1, 0, -6.99382e-08, -0.7, 2.85, -1.97)
+
 [node name="Board" type="CSGBox3D" parent="Room"]
 transform = Transform3D(-1, 3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 3.48787e-16, 3.48787e-16, -3.48787e-16, -1, -0.67193, 2.73878, -1.97125)
 material_override = SubResource("StandardMaterial3D_xej8x")
 size = Vector3(2.7704, 2.05614, 0.0253594)
 
 [node name="SpriteLayer" type="Node3D" parent="Room/Board"]
-transform = Transform3D(1, -2.29598e-26, -2.86997e-09, 6.30152e-25, 1, 1.0698e-23, -2.08346e-09, -3.01228e-25, 1, 0.00509775, 0, -0.0415187)
+transform = Transform3D(1, -1.21652e-31, -2.86997e-09, -7.26684e-25, 1, 0, -2.08346e-09, 0, 1, 0.00509775, 0, -0.0415187)
 
 [node name="RoomBounds" type="Node3D" parent="Room/Board"]
 transform = Transform3D(1.16181, 1.05879e-22, -4.15786e-23, -1.13014e-23, 1.11906, -3.78307e-23, -2.91168e-22, 2.64698e-23, 1, 0.0498917, -0.335002, 0)
@@ -338,6 +378,7 @@ shape = SubResource("BoxShape3D_cben6")
 
 [node name="DripPin" parent="Room/Board" instance=ExtResource("2_7eaf6")]
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 1.06782, 0.523019, -0.0278265)
+pin_name = "Drip"
 
 [node name="Badge" type="Sprite3D" parent="Room/Board/DripPin"]
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0, 0.0587966, 0)
@@ -368,13 +409,17 @@ transform = Transform3D(-1.434e-09, 6.97574e-18, 0.01, 1.58404e-24, 0.01, -6.975
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.638392, 4.04129, 0.305518)
 light_color = Color(1, 0.898039, 0.690196, 1)
-light_energy = 2.814
+light_energy = 3.0
 light_size = 1.0
 shadow_enabled = true
 shadow_opacity = 0.79
 shadow_blur = 2.869
 omni_range = 7.527
 omni_attenuation = 2.29739
+script = ExtResource("5_e5u3u")
+
+[node name="LightTimer" type="Timer" parent="OmniLight3D"]
+autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_x7o30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.394973, 2.18065, 0.244332)
@@ -450,11 +495,10 @@ connected_nodes = [NodePath("../Kitchen/Nodes/Kitchen5"), NodePath("../Kitchen/N
 [node name="CollisionShape3D" parent="House/Nodes/FoyerKitchenDoor" index="0"]
 shape = SubResource("CylinderShape3D_n2lgq")
 
-[node name="Kitchen" parent="House/Nodes" node_paths=PackedStringArray("board_area") instance=ExtResource("12_p13t5")]
+[node name="Kitchen" parent="House/Nodes" instance=ExtResource("12_p13t5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.86603, 2.08165e-12, -4.47571)
 disable_mode = 2
 doors = [NodePath("../FoyerKitchenDoor")]
-board_area = NodePath("../../../Room/Board/RoomBounds/Kitchen")
 
 [node name="Nodes" type="Node3D" parent="House/Nodes/Kitchen"]
 
@@ -488,11 +532,10 @@ connected_nodes = [NodePath("../Kitchen6"), NodePath("../Kitchen7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.280312)
 shape = SubResource("CylinderShape3D_k5f66")
 
-[node name="Foyer" parent="House/Nodes" node_paths=PackedStringArray("board_area") instance=ExtResource("12_p13t5")]
+[node name="Foyer" parent="House/Nodes" instance=ExtResource("12_p13t5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05212, 2.08165e-12, -4.4944)
 disable_mode = 2
 doors = [NodePath("../FoyerKitchenDoor")]
-board_area = NodePath("../../../Room/Board/RoomBounds/Foyer")
 
 [node name="Bounds" parent="House/Nodes/Foyer" index="0"]
 shape = SubResource("BoxShape3D_yxdd8")
@@ -514,8 +557,15 @@ connected_nodes = [NodePath("../Foyer2")]
 [node name="Radio" parent="." instance=ExtResource("13_4xqw8")]
 transform = Transform3D(-0.25, 0, 0.433013, 0, 0.5, 0, -0.433013, 0, -0.25, -1.25, 1.2, -1.43301)
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Radio"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Radio/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0)
+shape = SubResource("BoxShape3D_saymm")
+
 [connection signal="on_placed" from="Room/Board/DripPin" to="." method="_on_drip_pin_on_placed"]
 [connection signal="on_placed" from="Room/Board/ZombiePin" to="." method="_on_zombie_pin_on_placed"]
+[connection signal="timeout" from="OmniLight3D/LightTimer" to="OmniLight3D" method="_on_light_timer_timeout"]
 [connection signal="timeout" from="Television/SwapStaticTimer" to="." method="_on_swap_static_timer_timeout"]
 
 [editable path="House/Guys/Guy"]

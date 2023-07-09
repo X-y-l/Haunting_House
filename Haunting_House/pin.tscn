@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://co6f4pwx3qajl"]
+[gd_scene load_steps=10 format=3 uid="uid://co6f4pwx3qajl"]
 
 [ext_resource type="Script" path="res://pin.gd" id="1_d7fi0"]
 [ext_resource type="PackedScene" uid="uid://cxtbdpfdruuxg" path="res://pin.glb" id="1_t1koa"]
-[ext_resource type="AudioStream" uid="uid://cbotlyy1fpktw" path="res://Audio/pin_fall_4.wav" id="3_y86bt"]
+[ext_resource type="AudioStream" uid="uid://cbotlyy1fpktw" path="res://Audio/pin_fall_4.wav" id="3_4vuet"]
+[ext_resource type="Script" path="res://Pinlbl.gd" id="4_qomka"]
+[ext_resource type="FontFile" uid="uid://bjqp8xsqtboc8" path="res://Fonts/Get Show.ttf" id="5_oplfw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gkp2k"]
 friction = 0.93
@@ -16,6 +18,9 @@ height = 0.0873696
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i0nt5"]
 height = 0.135389
 radius = 0.0913301
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1hpg6"]
+viewport_path = NodePath("Sprite3D/SubViewport")
 
 [node name="Pin" type="RigidBody3D"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
@@ -46,6 +51,23 @@ shape = SubResource("CylinderShape3D_i0nt5")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_y86bt")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0.21, 0)
+flip_h = true
+flip_v = true
+texture = SubResource("ViewportTexture_1hpg6")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+script = ExtResource("4_qomka")
+
+[node name="Label" type="Label" parent="Sprite3D/SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("5_oplfw")
+theme_override_font_sizes/font_size = 128
+text = "Test"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="RemoveTimer" to="." method="_should_remove"]

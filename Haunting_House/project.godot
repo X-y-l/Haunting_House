@@ -12,13 +12,17 @@ config_version=5
 
 config/name="Haunting_House"
 run/main_scene="res://world.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
+config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=2500
 window/size/viewport_height=1800
+
+[filesystem]
+
+import/blender/enabled=false
 
 [physics]
 
