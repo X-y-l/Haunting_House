@@ -66,9 +66,6 @@ func _update_target():
 			if nodes.size() > 1:
 				var new_node_path = nodes[rng.randi_range(0, nodes.size()-1)]
 				var new_node = current_node.get_node(new_node_path)
-				
-				while new_node == current_node:
-					new_node = nodes[rng.randi_range(0, nodes.size()-1)]
 					
 				current_node = new_node
 		else:
