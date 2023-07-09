@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8344nv6lavsb"]
+
+[ext_resource type="Script" path="res://Spookometer.gd" id="1_r6504"]
+[ext_resource type="Texture2D" uid="uid://dwcw7rojt5bl3" path="res://placeholders/spookometer.png" id="2_axcth"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kywiu"]
+albedo_color = Color(0.352941, 0.352941, 0.352941, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_qvutf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_os1l5"]
+albedo_color = Color(1, 0.364706, 0.227451, 1)
+
+[node name="Spookometer" type="Node3D"]
+script = ExtResource("1_r6504")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("2_axcth")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(3.43923e-16, 4.37114e-09, 0.18, 0.18, -4.37114e-09, 0, 7.86805e-09, 0.1, -7.86805e-09, -4.14358, 0.403542, 0)
+material = SubResource("StandardMaterial3D_kywiu")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCylinder3D"]
+transform = Transform3D(0.555556, 7.45058e-08, 5.86215e-16, 0, -2.42841e-07, 1, 7.45058e-09, -5.55556, -4.37114e-08, 2.38419e-07, -1.92758e-07, -2.44989)
+mesh = SubResource("PrismMesh_qvutf")
+material = SubResource("StandardMaterial3D_os1l5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98846, 0, 4.99722)

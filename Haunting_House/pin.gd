@@ -46,3 +46,7 @@ func drop():
 	))
 	
 	$RemoveTimer.start(2)
+
+
+func _on_body_entered(body):
+	$AudioStreamPlayer.play()
