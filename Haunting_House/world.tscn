@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=56 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://267eckax1k7k" path="res://Cork/Board.glb" id="1_53l1l"]
@@ -251,6 +251,21 @@ size = Vector3(7.24606, 1, 6.45935)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_n1jsa"]
 radius = 0.978821
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_wbbj8"]
+size = Vector3(7.246, 1, 9)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mjpee"]
+radius = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ubra7"]
+size = Vector3(7.24606, 1, 9.57716)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r77ex"]
+radius = 1.06852
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_epcsb"]
+radius = 0.812687
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_saymm"]
 size = Vector3(0.6, 0.8, 1.55)
 
@@ -408,11 +423,12 @@ region_rect = Rect2(2.08165e-12, 2.08165e-12, 128, 128)
 
 [node name="ZombiePin" parent="Room/Board" instance=ExtResource("2_7eaf6")]
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0.748019, 0.523019, -0.0278265)
-[node name="Pin2" parent="Room/Board" instance=ExtResource("2_7eaf6")]
-transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0.748019, 0.423019, -0.0278265)
 
 [node name="MapMan" parent="Room/Board/ZombiePin" instance=ExtResource("2_wq4ct")]
 transform = Transform3D(-1.434e-09, 6.97574e-18, 0.01, 1.58404e-24, 0.01, -6.97574e-18, -0.01, 1.291e-24, -4.01997e-10, 0.0130442, 0.0452294, -1.19209e-07)
+
+[node name="Pin2" parent="Room/Board" instance=ExtResource("2_7eaf6")]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0.748019, 0.423019, -0.0278265)
 
 [node name="Pin3" parent="Room/Board" instance=ExtResource("2_7eaf6")]
 transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0.422527, 0.423019, -0.0278265)
@@ -495,13 +511,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, 0)
 [node name="Guy" parent="House/Guys" node_paths=PackedStringArray("current_node") instance=ExtResource("10_3yq5n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26183, 0, -5.53785)
 current_node = NodePath("../../Nodes/Foyer/Nodes/Foyer1")
+speed = 3.0
+go_to_new_room_prob = 0.6
 
 [node name="Sprite3D" parent="House/Guys/Guy" index="0"]
 modulate = Color(0.952941, 0.117647, 0, 1)
 
 [node name="Guy2" parent="House/Guys" node_paths=PackedStringArray("current_node") instance=ExtResource("10_3yq5n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.31526, 0, -3.73411)
-current_node = NodePath("../../Nodes/Kitchen/Nodes/Kitchen6")
+current_node = NodePath("../../Nodes/Kitchen/Nodes/Kitchen2")
+speed = 3.0
 
 [node name="Sprite3D" parent="House/Guys/Guy2" index="0"]
 modulate = Color(0.176471, 1, 0.192157, 1)
@@ -510,52 +529,87 @@ modulate = Color(0.176471, 1, 0.192157, 1)
 
 [node name="FoyerKitchenDoor" parent="House/Nodes" instance=ExtResource("11_gi3au")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75061, 0, -4.90631)
-connected_nodes = [NodePath("../Kitchen/Nodes/Kitchen5"), NodePath("../Kitchen/Nodes/Kitchen7"), NodePath("../Foyer/Nodes/Foyer1")]
+connected_nodes = [NodePath("../Kitchen/Nodes/Kitchen1"), NodePath("../Kitchen/Nodes/Kitchen3"), NodePath("../Foyer/Nodes/Foyer1")]
 
 [node name="CollisionShape3D" parent="House/Nodes/FoyerKitchenDoor" index="0"]
+shape = SubResource("CylinderShape3D_n2lgq")
+
+[node name="FoyerGameRoomDoor" parent="House/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63798, -2.38419e-07, -6.54166)
+connected_nodes = [NodePath("../GameRoom/Nodes/GameRoom2"), NodePath("../Foyer/Nodes/Foyer2")]
+
+[node name="CollisionShape3D" parent="House/Nodes/FoyerGameRoomDoor" index="0"]
+shape = SubResource("CylinderShape3D_n2lgq")
+
+[node name="GameRoomLivingRoomDoor" parent="House/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63798, -2.38419e-07, 0.207994)
+connected_nodes = [NodePath("../GameRoom/Nodes/GameRoom4"), NodePath("../LivingRoom/Nodes/Chairs")]
+
+[node name="CollisionShape3D" parent="House/Nodes/GameRoomLivingRoomDoor" index="0"]
+shape = SubResource("CylinderShape3D_n2lgq")
+
+[node name="ToiletLoungeDoor" parent="House/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63798, -2.38419e-07, 2.91037)
+connected_nodes = [NodePath("../LivingRoom/Nodes/Middle"), NodePath("../Toilet/Nodes/Corridor")]
+
+[node name="CollisionShape3D" parent="House/Nodes/ToiletLoungeDoor" index="0"]
+shape = SubResource("CylinderShape3D_n2lgq")
+
+[node name="LoungeDiningDoor" parent="House/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.92719, 0, 3.81765)
+connected_nodes = [NodePath("../DiningRoom/Nodes/End"), NodePath("../LivingRoom/Nodes/End")]
+
+[node name="CollisionShape3D" parent="House/Nodes/LoungeDiningDoor" index="0"]
+shape = SubResource("CylinderShape3D_n2lgq")
+
+[node name="KitchenDiningDoor" parent="House/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.32, -2.38419e-07, -1.55912)
+connected_nodes = [NodePath("../DiningRoom/Nodes/End"), NodePath("../Kitchen/Nodes/Kitchen2")]
+
+[node name="CollisionShape3D" parent="House/Nodes/KitchenDiningDoor" index="0"]
 shape = SubResource("CylinderShape3D_n2lgq")
 
 [node name="Kitchen" parent="House/Nodes" instance=ExtResource("12_p13t5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.86603, 2.08165e-12, -4.47571)
 disable_mode = 2
-doors = [NodePath("../FoyerKitchenDoor")]
+doors = [NodePath("../FoyerKitchenDoor"), NodePath("../KitchenDiningDoor")]
 
 [node name="Nodes" type="Node3D" parent="House/Nodes/Kitchen"]
 
-[node name="Kitchen5" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
+[node name="Kitchen1" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88387, 0, 1.78168)
-connected_nodes = [NodePath("../Kitchen7")]
+connected_nodes = [NodePath("../Kitchen3")]
 
-[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen5" index="0"]
+[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen1" index="0"]
 shape = SubResource("CylinderShape3D_f3mmt")
 
-[node name="Kitchen6" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
+[node name="Kitchen2" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52677, 0, 0.979807)
-connected_nodes = [NodePath("../Kitchen8")]
+connected_nodes = [NodePath("../Kitchen4")]
 
-[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen6" index="0"]
+[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen2" index="0"]
 shape = SubResource("CylinderShape3D_f3mmt")
 
-[node name="Kitchen7" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
+[node name="Kitchen3" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77083, 0, -1.28419)
-connected_nodes = [NodePath("../Kitchen5"), NodePath("../Kitchen8")]
+connected_nodes = [NodePath("../Kitchen1"), NodePath("../Kitchen4")]
 
-[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen7" index="0"]
+[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.280312)
 shape = SubResource("CylinderShape3D_k5f66")
 
-[node name="Kitchen8" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
+[node name="Kitchen4" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66889, 0, -1.28419)
-connected_nodes = [NodePath("../Kitchen6"), NodePath("../Kitchen7")]
+connected_nodes = [NodePath("../Kitchen2"), NodePath("../Kitchen3")]
 
-[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen8" index="0"]
+[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen4" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.280312)
 shape = SubResource("CylinderShape3D_k5f66")
 
 [node name="Foyer" parent="House/Nodes" instance=ExtResource("12_p13t5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05212, 2.08165e-12, -4.4944)
 disable_mode = 2
-doors = [NodePath("../FoyerKitchenDoor")]
+doors = [NodePath("../FoyerKitchenDoor"), NodePath("../FoyerGameRoomDoor")]
 
 [node name="Bounds" parent="House/Nodes/Foyer" index="0"]
 shape = SubResource("BoxShape3D_yxdd8")
@@ -574,6 +628,128 @@ shape = SubResource("CylinderShape3D_n1jsa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60918, 2.60209e-18, -1.38978)
 connected_nodes = [NodePath("../Foyer2")]
 
+[node name="LivingRoom" parent="House/Nodes" instance=ExtResource("12_p13t5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05212, 2.08165e-12, 3.13509)
+disable_mode = 2
+doors = [NodePath("../GameRoomLivingRoomDoor"), NodePath("../ToiletLoungeDoor"), NodePath("../LoungeDiningDoor")]
+
+[node name="Bounds" parent="House/Nodes/LivingRoom" index="0"]
+shape = SubResource("BoxShape3D_wbbj8")
+
+[node name="Nodes" type="Node3D" parent="House/Nodes/LivingRoom"]
+
+[node name="Chairs" parent="House/Nodes/LivingRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85212, -2.08165e-12, -2.5692)
+connected_nodes = [NodePath("../End"), NodePath("../Middle")]
+
+[node name="CollisionShape3D" parent="House/Nodes/LivingRoom/Nodes/Chairs" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42128, 0, -0.0700378)
+shape = SubResource("CylinderShape3D_n1jsa")
+
+[node name="End" parent="House/Nodes/LivingRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34629, 2.38417e-07, -2.88931)
+connected_nodes = [NodePath("../Chairs")]
+
+[node name="CollisionShape3D" parent="House/Nodes/LivingRoom/Nodes/End" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42128, 0, -0.0700378)
+shape = SubResource("CylinderShape3D_n1jsa")
+
+[node name="Middle" parent="House/Nodes/LivingRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07747, 2.60209e-18, 0.625699)
+connected_nodes = [NodePath("../Chairs")]
+
+[node name="DiningRoom" parent="House/Nodes" instance=ExtResource("12_p13t5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4195, 2.08165e-12, 3.13509)
+disable_mode = 2
+doors = [NodePath("../KitchenDiningDoor"), NodePath("../LoungeDiningDoor")]
+
+[node name="Bounds" parent="House/Nodes/DiningRoom" index="0"]
+shape = SubResource("BoxShape3D_wbbj8")
+
+[node name="Nodes" type="Node3D" parent="House/Nodes/DiningRoom"]
+
+[node name="Chairs" parent="House/Nodes/DiningRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93072, -2.08165e-12, -3.4165)
+connected_nodes = [NodePath("../Camera"), NodePath("../End")]
+
+[node name="CollisionShape3D" parent="House/Nodes/DiningRoom/Nodes/Chairs" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42128, 0, -0.0700378)
+shape = SubResource("CylinderShape3D_n1jsa")
+
+[node name="End" parent="House/Nodes/DiningRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.93922, -2.08165e-12, -3.53523)
+connected_nodes = [NodePath("../Chairs")]
+
+[node name="CollisionShape3D" parent="House/Nodes/DiningRoom/Nodes/End" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42128, 0, -0.0700378)
+shape = SubResource("CylinderShape3D_n1jsa")
+
+[node name="Camera" parent="House/Nodes/DiningRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07747, 2.60209e-18, 0.625699)
+connected_nodes = [NodePath("../Chairs")]
+
+[node name="CollisionShape3D" parent="House/Nodes/DiningRoom/Nodes/Camera" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.239273, 0.041388, 1.9008)
+shape = SubResource("CylinderShape3D_mjpee")
+
+[node name="GameRoom" parent="House/Nodes" instance=ExtResource("12_p13t5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.27013, 2.08165e-12, -3.05008)
+disable_mode = 2
+doors = [NodePath("../FoyerGameRoomDoor"), NodePath("../GameRoomLivingRoomDoor")]
+
+[node name="Bounds" parent="House/Nodes/GameRoom" index="0"]
+shape = SubResource("BoxShape3D_ubra7")
+
+[node name="Nodes" type="Node3D" parent="House/Nodes/GameRoom"]
+
+[node name="GameRoom1" parent="House/Nodes/GameRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43436, -4.76839e-07, 3.56103)
+connected_nodes = [NodePath("../GameRoom3"), NodePath("../GameRoom4")]
+
+[node name="CollisionShape3D" parent="House/Nodes/GameRoom/Nodes/GameRoom1" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16921, 0.053071, 0.00599861)
+shape = SubResource("CylinderShape3D_r77ex")
+
+[node name="GameRoom3" parent="House/Nodes/GameRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32848, -2.08165e-12, -2.43042)
+connected_nodes = [NodePath("../GameRoom1"), NodePath("../GameRoom2")]
+
+[node name="CollisionShape3D" parent="House/Nodes/GameRoom/Nodes/GameRoom3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16921, 0.053071, 0.00599861)
+shape = SubResource("CylinderShape3D_r77ex")
+
+[node name="GameRoom2" parent="House/Nodes/GameRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18166, 2.60209e-18, -3.08777)
+connected_nodes = [NodePath("../GameRoom3"), NodePath("../GameRoom4")]
+
+[node name="GameRoom4" parent="House/Nodes/GameRoom/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25679, 2.60209e-18, 3.22328)
+connected_nodes = [NodePath("../GameRoom2"), NodePath("../GameRoom1")]
+
+[node name="CollisionShape3D" parent="House/Nodes/GameRoom/Nodes/GameRoom4" index="0"]
+shape = SubResource("CylinderShape3D_epcsb")
+
+[node name="Toilet" parent="House/Nodes" instance=ExtResource("12_p13t5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.27013, 2.08165e-12, 6.43845)
+disable_mode = 2
+doors = [NodePath("../ToiletLoungeDoor")]
+
+[node name="Bounds" parent="House/Nodes/Toilet" index="0"]
+shape = SubResource("BoxShape3D_ubra7")
+
+[node name="Nodes" type="Node3D" parent="House/Nodes/Toilet"]
+
+[node name="Corridor" parent="House/Nodes/Toilet/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32571, 2.60209e-18, -3.51138)
+connected_nodes = [NodePath("../Inside")]
+
+[node name="Inside" parent="House/Nodes/Toilet/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33801, 2.60209e-18, -1.36671)
+connected_nodes = [NodePath("../Corridor")]
+
+[node name="CollisionShape3D" parent="House/Nodes/Toilet/Nodes/Inside" index="0"]
+shape = SubResource("CylinderShape3D_epcsb")
+
 [node name="Radio" parent="." instance=ExtResource("13_4xqw8")]
 transform = Transform3D(-0.25, 0, 0.433013, 0, 0.5, 0, -0.433013, 0, -0.25, -1.25, 1.2, -1.43301)
 
@@ -591,10 +767,28 @@ shape = SubResource("BoxShape3D_saymm")
 [editable path="House/Guys/Guy"]
 [editable path="House/Guys/Guy2"]
 [editable path="House/Nodes/FoyerKitchenDoor"]
+[editable path="House/Nodes/FoyerGameRoomDoor"]
+[editable path="House/Nodes/GameRoomLivingRoomDoor"]
+[editable path="House/Nodes/ToiletLoungeDoor"]
+[editable path="House/Nodes/LoungeDiningDoor"]
+[editable path="House/Nodes/KitchenDiningDoor"]
 [editable path="House/Nodes/Kitchen"]
-[editable path="House/Nodes/Kitchen/Nodes/Kitchen5"]
-[editable path="House/Nodes/Kitchen/Nodes/Kitchen6"]
-[editable path="House/Nodes/Kitchen/Nodes/Kitchen7"]
-[editable path="House/Nodes/Kitchen/Nodes/Kitchen8"]
+[editable path="House/Nodes/Kitchen/Nodes/Kitchen1"]
+[editable path="House/Nodes/Kitchen/Nodes/Kitchen2"]
+[editable path="House/Nodes/Kitchen/Nodes/Kitchen3"]
+[editable path="House/Nodes/Kitchen/Nodes/Kitchen4"]
 [editable path="House/Nodes/Foyer"]
 [editable path="House/Nodes/Foyer/Nodes/Foyer2"]
+[editable path="House/Nodes/LivingRoom"]
+[editable path="House/Nodes/LivingRoom/Nodes/Chairs"]
+[editable path="House/Nodes/LivingRoom/Nodes/End"]
+[editable path="House/Nodes/DiningRoom"]
+[editable path="House/Nodes/DiningRoom/Nodes/Chairs"]
+[editable path="House/Nodes/DiningRoom/Nodes/End"]
+[editable path="House/Nodes/DiningRoom/Nodes/Camera"]
+[editable path="House/Nodes/GameRoom"]
+[editable path="House/Nodes/GameRoom/Nodes/GameRoom1"]
+[editable path="House/Nodes/GameRoom/Nodes/GameRoom3"]
+[editable path="House/Nodes/GameRoom/Nodes/GameRoom4"]
+[editable path="House/Nodes/Toilet"]
+[editable path="House/Nodes/Toilet/Nodes/Inside"]
