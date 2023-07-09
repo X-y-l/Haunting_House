@@ -12,6 +12,7 @@ viewport_path = NodePath("Camera3D/Sprite3D/SubViewport")
 
 [node name="Sprite3D" type="Sprite3D" parent="Camera3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.3, -1)
+visible = false
 texture = SubResource("ViewportTexture_5384d")
 
 [node name="SubViewport" type="SubViewport" parent="Camera3D/Sprite3D"]
