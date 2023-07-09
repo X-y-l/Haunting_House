@@ -14,6 +14,5 @@ func _process(delta):
 func _on_light_timer_timeout():
 	var rand_amt := (randf())
 	rand_amt *= rand_amt
-	print(rand_amt)
 	self.light_energy = 3 - rand_amt
 	timer.start(rand_amt/2)

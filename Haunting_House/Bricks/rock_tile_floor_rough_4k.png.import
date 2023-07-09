@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dme1xymjgyphl"
-path.s3tc="res://.godot/imported/rock_tile_floor_rough_4k.png-7d5e40442d1bc6a054e2fb0bde8ea92e.s3tc.ctex"
+path.etc2="res://.godot/imported/rock_tile_floor_rough_4k.png-7d5e40442d1bc6a054e2fb0bde8ea92e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Bricks/rock_tile_floor_rough_4k.png"
-dest_files=["res://.godot/imported/rock_tile_floor_rough_4k.png-7d5e40442d1bc6a054e2fb0bde8ea92e.s3tc.ctex"]
+dest_files=["res://.godot/imported/rock_tile_floor_rough_4k.png-7d5e40442d1bc6a054e2fb0bde8ea92e.etc2.ctex"]
 
 [params]
 

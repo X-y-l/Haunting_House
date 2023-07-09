@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://hfjhsmw3owf"
-path.s3tc="res://.godot/imported/Board_plywood_rough_4k.png-0d93aff1d20af6bf95f5ba37087dc1ff.s3tc.ctex"
+path.etc2="res://.godot/imported/Board_plywood_rough_4k.png-0d93aff1d20af6bf95f5ba37087dc1ff.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://Cork/Board_plywood_rough_4k.png"
-dest_files=["res://.godot/imported/Board_plywood_rough_4k.png-0d93aff1d20af6bf95f5ba37087dc1ff.s3tc.ctex"]
+dest_files=["res://.godot/imported/Board_plywood_rough_4k.png-0d93aff1d20af6bf95f5ba37087dc1ff.etc2.ctex"]
 
 [params]
 

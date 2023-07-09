@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ug7e2nbq3bgx"
-path.s3tc="res://.godot/imported/japanese_stone_wall_rough_4k.png-e024100f5baae5f166563351f4ffc928.s3tc.ctex"
+path.etc2="res://.godot/imported/japanese_stone_wall_rough_4k.png-e024100f5baae5f166563351f4ffc928.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Wall/japanese_stone_wall_rough_4k.png"
-dest_files=["res://.godot/imported/japanese_stone_wall_rough_4k.png-e024100f5baae5f166563351f4ffc928.s3tc.ctex"]
+dest_files=["res://.godot/imported/japanese_stone_wall_rough_4k.png-e024100f5baae5f166563351f4ffc928.etc2.ctex"]
 
 [params]
 

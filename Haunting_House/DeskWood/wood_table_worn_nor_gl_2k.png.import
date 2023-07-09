@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbsvtrixe1lh8"
-path.s3tc="res://.godot/imported/wood_table_worn_nor_gl_2k.png-c7b2d7907644ba91832e4f3ab393eca5.s3tc.ctex"
+path.etc2="res://.godot/imported/wood_table_worn_nor_gl_2k.png-c7b2d7907644ba91832e4f3ab393eca5.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://DeskWood/wood_table_worn_nor_gl_2k.png"
-dest_files=["res://.godot/imported/wood_table_worn_nor_gl_2k.png-c7b2d7907644ba91832e4f3ab393eca5.s3tc.ctex"]
+dest_files=["res://.godot/imported/wood_table_worn_nor_gl_2k.png-c7b2d7907644ba91832e4f3ab393eca5.etc2.ctex"]
 
 [params]
 

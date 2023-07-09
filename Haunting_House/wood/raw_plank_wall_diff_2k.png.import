@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dplmp8uopkjge"
-path.s3tc="res://.godot/imported/raw_plank_wall_diff_2k.png-99cc3376fece0a48e99467f023baf4be.s3tc.ctex"
+path.etc2="res://.godot/imported/raw_plank_wall_diff_2k.png-99cc3376fece0a48e99467f023baf4be.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://wood/raw_plank_wall_diff_2k.png"
-dest_files=["res://.godot/imported/raw_plank_wall_diff_2k.png-99cc3376fece0a48e99467f023baf4be.s3tc.ctex"]
+dest_files=["res://.godot/imported/raw_plank_wall_diff_2k.png-99cc3376fece0a48e99467f023baf4be.etc2.ctex"]
 
 [params]
 
