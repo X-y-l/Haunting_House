@@ -1,6 +1,7 @@
 extends Area3D
 
 @export var doors: Array = []
+@export var board_area: Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
