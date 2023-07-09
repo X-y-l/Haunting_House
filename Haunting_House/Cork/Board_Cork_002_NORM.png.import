@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4pgkdsn8qe2a"
-path.etc2="res://.godot/imported/Board_Cork_002_NORM.png-2567c7f35d0d8f2743c2b45ae56f8895.etc2.ctex"
+path.s3tc="res://.godot/imported/Board_Cork_002_NORM.png-2567c7f35d0d8f2743c2b45ae56f8895.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://Cork/Board_Cork_002_NORM.png"
-dest_files=["res://.godot/imported/Board_Cork_002_NORM.png-2567c7f35d0d8f2743c2b45ae56f8895.etc2.ctex"]
+dest_files=["res://.godot/imported/Board_Cork_002_NORM.png-2567c7f35d0d8f2743c2b45ae56f8895.s3tc.ctex"]
 
 [params]
 

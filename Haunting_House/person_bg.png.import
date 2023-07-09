@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b676adbuyvtde"
-path.etc2="res://.godot/imported/person_bg.png-e8e697b149ff43cd3d6bd6f92b40ad51.etc2.ctex"
+path.s3tc="res://.godot/imported/person_bg.png-e8e697b149ff43cd3d6bd6f92b40ad51.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://person_bg.png"
-dest_files=["res://.godot/imported/person_bg.png-e8e697b149ff43cd3d6bd6f92b40ad51.etc2.ctex"]
+dest_files=["res://.godot/imported/person_bg.png-e8e697b149ff43cd3d6bd6f92b40ad51.s3tc.ctex"]
 
 [params]
 
