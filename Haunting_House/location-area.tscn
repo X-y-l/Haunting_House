@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdjyvje0psojx"]
+
+[ext_resource type="Script" path="res://location-area.gd" id="1_dnsgq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_68hju"]
+size = Vector3(6.23531, 1, 5.63714)
+
+[node name="Area" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+script = ExtResource("1_dnsgq")
+
+[node name="Bounds" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_68hju")

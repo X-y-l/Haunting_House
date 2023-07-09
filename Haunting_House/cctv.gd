@@ -3,8 +3,8 @@ extends Camera3D
 var mid_rot: float
 var time: float = 0
 
-@export var move_speed = 0.5
-@export var move_amount = 0.2
+@export var move_speed = 0.3
+@export var move_amount = 0.1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
