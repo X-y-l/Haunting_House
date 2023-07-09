@@ -9,9 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://c8fa0otl7lb11" path="res://cctv.tscn" id="5_rshed"]
 [ext_resource type="PackedScene" uid="uid://b58qoqeeyhrl4" path="res://TV/Television.glb" id="6_amud6"]
 [ext_resource type="PackedScene" uid="uid://cnivx8xyj7l4b" path="res://House/House.tscn" id="8_kko80"]
-[ext_resource type="PackedScene" uid="uid://cou1qardtod61" path="res://guy.tscn" id="10_3yq5n"]
-[ext_resource type="PackedScene" uid="uid://c07kuols1ql6y" path="res://location-node.tscn" id="11_gi3au"]
-[ext_resource type="PackedScene" uid="uid://cdjyvje0psojx" path="res://location-area.tscn" id="12_p13t5"]
+[ext_resource type="PackedScene" path="res://guy.tscn" id="10_3yq5n"]
+[ext_resource type="PackedScene" path="res://location-node.tscn" id="11_gi3au"]
+[ext_resource type="PackedScene" path="res://location-area.tscn" id="12_p13t5"]
 
 [sub_resource type="GDScript" id="GDScript_xg0o6"]
 script/source = "extends Node3D

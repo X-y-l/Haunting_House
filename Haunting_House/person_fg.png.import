@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwpf7lkwloh3i"
-path.etc2="res://.godot/imported/person_fg.png-eebb530b5f2abe5d1c24c2d2d548d4cd.etc2.ctex"
+path.s3tc="res://.godot/imported/person_fg.png-eebb530b5f2abe5d1c24c2d2d548d4cd.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://person_fg.png"
-dest_files=["res://.godot/imported/person_fg.png-eebb530b5f2abe5d1c24c2d2d548d4cd.etc2.ctex"]
+dest_files=["res://.godot/imported/person_fg.png-eebb530b5f2abe5d1c24c2d2d548d4cd.s3tc.ctex"]
 
 [params]
 
