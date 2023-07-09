@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://co6f4pwx3qajl"]
+[gd_scene load_steps=10 format=3 uid="uid://co6f4pwx3qajl"]
 
 [ext_resource type="Script" path="res://pin.gd" id="1_d7fi0"]
 [ext_resource type="PackedScene" uid="uid://cxtbdpfdruuxg" path="res://pin.glb" id="1_t1koa"]
 [ext_resource type="AudioStream" uid="uid://cbotlyy1fpktw" path="res://Audio/pin_fall_4.wav" id="3_4vuet"]
 [ext_resource type="Script" path="res://Pinlbl.gd" id="4_qomka"]
+[ext_resource type="FontFile" uid="uid://bjqp8xsqtboc8" path="res://Fonts/Get Show.ttf" id="5_oplfw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gkp2k"]
 friction = 0.93
@@ -52,7 +53,7 @@ shape = SubResource("CylinderShape3D_i0nt5")
 stream = ExtResource("3_4vuet")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(-1.31134e-08, -3.64957e-32, 0.3, 0, 0.3, 2.04366e-24, -0.3, 0, -1.31134e-08, 0, 0.12, -0.1)
+transform = Transform3D(-4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 0.21, 0)
 flip_h = true
 flip_v = true
 texture = SubResource("ViewportTexture_1hpg6")
@@ -64,6 +65,8 @@ script = ExtResource("4_qomka")
 [node name="Label" type="Label" parent="Sprite3D/SubViewport"]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("5_oplfw")
+theme_override_font_sizes/font_size = 128
 text = "Test"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
