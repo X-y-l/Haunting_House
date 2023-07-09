@@ -356,6 +356,7 @@ mesh = SubResource("QuadMesh_tma4v")
 transform = Transform3D(1, -7.30389e-16, 2.90961e-08, 7.30389e-16, 1, -9.90698e-16, -2.90961e-08, 9.90698e-16, 1, -0.0215753, -0.169358, -0.0239799)
 collision_layer = 2
 metadata/cctv = NodePath("../../../../CameraStorage/CCTVLivingRoom")
+metadata/room_area = NodePath("../../../../House/Nodes/LivingRoom")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Board2/BPDown/LivingRoom"]
 transform = Transform3D(1, -9.80044e-23, -2.86997e-09, 4.80329e-23, 1, 1.05879e-22, -2.08346e-09, 1.16467e-21, 1, 0.0192312, 0.0604439, -0.00346684)
@@ -365,6 +366,7 @@ shape = SubResource("BoxShape3D_ya8fk")
 transform = Transform3D(1, -7.30389e-16, 2.90961e-08, 7.30389e-16, 1, -9.90698e-16, -2.90961e-08, 9.90698e-16, 1, -0.361721, 0.351075, -0.0162916)
 collision_layer = 2
 metadata/cctv = NodePath("../../../../CameraStorage/CCTVBathroom")
+metadata/room_area = NodePath("../../../../House/Nodes/Toilet")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Board2/BPDown/Bathroom"]
 transform = Transform3D(1, 7.87478e-24, -2.86997e-09, 4.80329e-23, 1, -1.05879e-22, -2.08346e-09, 1.05879e-22, 1, 0.678398, -0.533656, 0.017801)
@@ -374,6 +376,7 @@ shape = SubResource("BoxShape3D_44asb")
 transform = Transform3D(1, -7.30389e-16, 2.90961e-08, 7.30389e-16, 1, -9.90698e-16, -2.90961e-08, 9.90698e-16, 1, -0.362444, -0.0688283, -0.0164139)
 collision_layer = 2
 metadata/cctv = NodePath("../../../../CameraStorage/CCTVDiningRoom")
+metadata/room_area = NodePath("../../../../House/Nodes/DiningRoom")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Board2/BPDown/DiningRoom"]
 transform = Transform3D(1, 7.87478e-24, -2.86997e-09, -4.90666e-24, 1, -1.05879e-22, -2.08346e-09, 1.05879e-22, 1, 0.0434278, -0.0394423, 0.0234516)
@@ -403,6 +406,7 @@ shape = SubResource("BoxShape3D_awdbq")
 transform = Transform3D(1, -7.30389e-16, 2.90961e-08, 7.30389e-16, 1, -9.90698e-16, -2.90961e-08, 9.90698e-16, 1, 0.324, 0.252, 0.07)
 collision_layer = 2
 metadata/cctv = NodePath("../../../../CameraStorage/CCTVGameRoom")
+metadata/room_area = NodePath("../../../../House/Nodes/GameRoom")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Board2/BPDown/GameRoom"]
 transform = Transform3D(1, 7.87478e-24, -2.86997e-09, -4.90666e-24, 1, -1.05879e-22, -2.08346e-09, 1.05879e-22, 1, -0.00685984, -0.0855892, -0.0700457)
@@ -416,7 +420,7 @@ mesh = SubResource("QuadMesh_tma4v")
 [node name="Board" type="CSGBox3D" parent="Room"]
 transform = Transform3D(-1, 3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 3.48787e-16, 3.48787e-16, -3.48787e-16, -1, -0.67193, 2.73878, -1.97125)
 material_override = SubResource("StandardMaterial3D_xej8x")
-size = Vector3(2.7704, 2.05614, 0.0253594)
+size = Vector3(0, 2.056, 0.025)
 
 [node name="SpriteLayer" type="Node3D" parent="Room/Board"]
 transform = Transform3D(1, -1.21652e-31, -2.86997e-09, -7.26684e-25, 1, 0, -2.08346e-09, 0, 1, 0.00509775, 0, -0.0415187)
