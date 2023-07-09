@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b60gvtb3dmh47"
-path.s3tc="res://.godot/imported/Radio_TT_checker_4096x4096_UV_GRID_Normal.png-eb7a2b97b4feef093d69e05e65881b3f.s3tc.ctex"
+path.etc2="res://.godot/imported/Radio_TT_checker_4096x4096_UV_GRID_Normal.png-eb7a2b97b4feef093d69e05e65881b3f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +13,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://Radio/Radio_TT_checker_4096x4096_UV_GRID_Normal.png"
-dest_files=["res://.godot/imported/Radio_TT_checker_4096x4096_UV_GRID_Normal.png-eb7a2b97b4feef093d69e05e65881b3f.s3tc.ctex"]
+dest_files=["res://.godot/imported/Radio_TT_checker_4096x4096_UV_GRID_Normal.png-eb7a2b97b4feef093d69e05e65881b3f.etc2.ctex"]
 
 [params]
 

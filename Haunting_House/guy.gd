@@ -9,6 +9,7 @@ extends Node3D
 var target_position: Vector3 = Vector3.ZERO
 var close_dist = 0.2
 var rng = RandomNumberGenerator.new()
+var spook = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,7 +36,6 @@ func _update_target():
 			# TODO: this should only pick one which is connected to the node
 			var door = room_node.get_node(doors.pick_random())
 			
-			print("moving to new via ", door, " from ", room_node)
 			target_position = door.global_position
 			
 			var areas = door.get_overlapping_areas()
@@ -57,7 +57,6 @@ func _update_target():
 				var found = false
 				for conn in connected_to_door:
 					if door.get_node(conn) == current_node:
-						print("going to area: ", new_area, "; node = ", current_node)
 						found = true
 						break
 				if found:
@@ -72,10 +71,8 @@ func _update_target():
 					new_node = nodes[rng.randi_range(0, nodes.size()-1)]
 					
 				current_node = new_node
-				print("went to new node")
 		else:
 			target_position = current_node.random_location()
-			print("went to new position in current node")
 
 func _on_move_timer_timeout():
 	_update_target()
