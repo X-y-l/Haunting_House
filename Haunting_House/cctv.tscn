@@ -18,7 +18,6 @@ shader_parameter/white_noise_rate = 0.17
 transform = Transform3D(-0.863315, -0.271334, 0.425517, -0.00866886, 0.851016, 0.525068, -0.504591, 0.44961, -0.737047, 25.1703, 3.19899, -7.5194)
 fov = 120.4
 script = ExtResource("1_ftxgb")
-move_speed = 0.3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

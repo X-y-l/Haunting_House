@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bjjq5nfk1syjm"]
+[gd_scene load_steps=37 format=3 uid="uid://bjjq5nfk1syjm"]
 
 [ext_resource type="Texture2D" uid="uid://s7anh1ml1vfn" path="res://board.png" id="1_6lrts"]
 [ext_resource type="PackedScene" uid="uid://bfxh8m6a8md55" path="res://player.tscn" id="1_x7o30"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://c8fa0otl7lb11" path="res://cctv.tscn" id="5_rshed"]
 [ext_resource type="PackedScene" uid="uid://b58qoqeeyhrl4" path="res://TV/Television.glb" id="6_amud6"]
 [ext_resource type="PackedScene" uid="uid://cnivx8xyj7l4b" path="res://House/House.tscn" id="8_kko80"]
+[ext_resource type="PackedScene" uid="uid://cou1qardtod61" path="res://guy.tscn" id="10_3yq5n"]
+[ext_resource type="PackedScene" uid="uid://c07kuols1ql6y" path="res://location-node.tscn" id="11_gi3au"]
+[ext_resource type="PackedScene" uid="uid://cdjyvje0psojx" path="res://location-area.tscn" id="12_p13t5"]
 
 [sub_resource type="GDScript" id="GDScript_xg0o6"]
 script/source = "extends Node3D
@@ -168,6 +171,21 @@ albedo_texture = ExtResource("2_606cp")
 [sub_resource type="PlaneMesh" id="PlaneMesh_uo1h5"]
 material = SubResource("StandardMaterial3D_gqs5b")
 size = Vector2(1.5, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n2lgq"]
+radius = 0.864052
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f3mmt"]
+radius = 0.864052
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k5f66"]
+radius = 0.622192
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxdd8"]
+size = Vector3(7.24606, 1, 6.45935)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n1jsa"]
+radius = 0.978821
 
 [node name="World" type="Node3D"]
 script = SubResource("GDScript_xg0o6")
@@ -374,4 +392,81 @@ one_shot = true
 [node name="House" parent="." instance=ExtResource("8_kko80")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, 0)
 
+[node name="Guys" type="Node3D" parent="House"]
+
+[node name="Guy" parent="House/Guys" node_paths=PackedStringArray("current_node") instance=ExtResource("10_3yq5n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26183, 0, -5.53785)
+current_node = NodePath("../../Nodes/Foyer/Nodes/Foyer1")
+
+[node name="Guy2" parent="House/Guys" instance=ExtResource("10_3yq5n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.45794, 0, -3.73411)
+
+[node name="Nodes" type="Node3D" parent="House"]
+
+[node name="FoyerKitchenDoor" parent="House/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75061, 0, -4.90631)
+
+[node name="CollisionShape3D" parent="House/Nodes/FoyerKitchenDoor" index="0"]
+shape = SubResource("CylinderShape3D_n2lgq")
+
+[node name="Kitchen" parent="House/Nodes" instance=ExtResource("12_p13t5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.86603, 2.08165e-12, -4.47571)
+doors = [NodePath("../FoyerKitchenDoor")]
+
+[node name="Nodes" type="Node3D" parent="House/Nodes/Kitchen"]
+
+[node name="Kitchen5" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88387, 0, 1.78168)
+
+[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen5" index="0"]
+shape = SubResource("CylinderShape3D_f3mmt")
+
+[node name="Kitchen6" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52677, 0, 0.979807)
+
+[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen6" index="0"]
+shape = SubResource("CylinderShape3D_f3mmt")
+
+[node name="Kitchen7" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77083, 0, -1.28419)
+
+[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen7" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.280312)
+shape = SubResource("CylinderShape3D_k5f66")
+
+[node name="Kitchen8" parent="House/Nodes/Kitchen/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66889, 0, -1.28419)
+
+[node name="CollisionShape3D" parent="House/Nodes/Kitchen/Nodes/Kitchen8" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.280312)
+shape = SubResource("CylinderShape3D_k5f66")
+
+[node name="Foyer" parent="House/Nodes" instance=ExtResource("12_p13t5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05212, 2.08165e-12, -4.4944)
+doors = [NodePath("../FoyerKitchenDoor")]
+
+[node name="Bounds" parent="House/Nodes/Foyer" index="0"]
+shape = SubResource("BoxShape3D_yxdd8")
+
+[node name="Nodes" type="Node3D" parent="House/Nodes/Foyer"]
+
+[node name="Foyer2" parent="House/Nodes/Foyer/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02116, -2.08165e-12, -1.82688)
+
+[node name="CollisionShape3D" parent="House/Nodes/Foyer/Nodes/Foyer2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42128, 0, -0.0700378)
+shape = SubResource("CylinderShape3D_n1jsa")
+
+[node name="Foyer1" parent="House/Nodes/Foyer/Nodes" instance=ExtResource("11_gi3au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60918, 2.60209e-18, -1.38978)
+
 [connection signal="timeout" from="Television/SwapStaticTimer" to="." method="_on_swap_static_timer_timeout"]
+
+[editable path="House/Nodes/FoyerKitchenDoor"]
+[editable path="House/Nodes/Kitchen"]
+[editable path="House/Nodes/Kitchen/Nodes/Kitchen5"]
+[editable path="House/Nodes/Kitchen/Nodes/Kitchen6"]
+[editable path="House/Nodes/Kitchen/Nodes/Kitchen7"]
+[editable path="House/Nodes/Kitchen/Nodes/Kitchen8"]
+[editable path="House/Nodes/Foyer"]
+[editable path="House/Nodes/Foyer/Nodes/Foyer2"]

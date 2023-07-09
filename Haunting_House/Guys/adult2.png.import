@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beenaxm7fmvum"
-path.etc2="res://.godot/imported/Television_Television_01_metallic-Television_01_roughness.png-0af0532cd70a6e43424c260bdb59ecd9.etc2.ctex"
+uid="uid://cdg2f28fbetwb"
+path.etc2="res://.godot/imported/adult2.png-63b902cf8634bbea222a3232edf9cf43.etc2.ctex"
 metadata={
 "imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://TV/Television_Television_01_metallic-Television_01_roughness.png"
-dest_files=["res://.godot/imported/Television_Television_01_metallic-Television_01_roughness.png-0af0532cd70a6e43424c260bdb59ecd9.etc2.ctex"]
+source_file="res://Guys/adult2.png"
+dest_files=["res://.godot/imported/adult2.png-63b902cf8634bbea222a3232edf9cf43.etc2.ctex"]
 
 [params]
 
